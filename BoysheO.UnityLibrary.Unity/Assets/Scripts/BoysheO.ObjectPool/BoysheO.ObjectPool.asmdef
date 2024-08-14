@@ -1,0 +1,6 @@
+{
+  "name": "BoysheO.ObjectPool",
+  "references": [
+    "BoysheO.Extensions"
+  ]
+}

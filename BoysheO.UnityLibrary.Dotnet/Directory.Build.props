@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup>
+        <UnityScripts>../../BoysheO.UnityLibrary.Unity/Assets/Scripts</UnityScripts>
+    </PropertyGroup>
+</Project>

@@ -1,0 +1,8 @@
+{
+  "name": "BoysheO.Collection",
+  "references": [
+    "BoysheO.Extensions",
+    "BoysheO.Collection.Abstractions",
+    "UnityEngine.UI"
+  ]
+}

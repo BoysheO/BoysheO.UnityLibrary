@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>9</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>0.0.1</Version>
+        <Authors>BoysheO</Authors>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="$(UnityScripts)/$(MSBuildProjectName)/**/*.cs">
+            <Link>Unity/%(RecursiveDir)%(FileName)%(Extension)</Link>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="BoysheO.Extensions" Version="5.0.6" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\BoysheO.Collection.Abstractions\BoysheO.Collection.Abstractions.csproj" />
+    </ItemGroup>
+</Project>
