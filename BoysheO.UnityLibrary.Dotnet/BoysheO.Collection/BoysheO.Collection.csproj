@@ -5,18 +5,33 @@
         <Nullable>enable</Nullable>
         <LangVersion>9</LangVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>0.0.1</Version>
         <Authors>BoysheO</Authors>
+        <PackageJsonPath>$(UnityScripts)\$(MSBuildProjectName)\package.json</PackageJsonPath>
     </PropertyGroup>
+
+    <UsingTask TaskName="ReadPackageJsonVersion" AssemblyFile="../CustomVersion.dll"/>
+
+    <Target Name="ReadVersionFromPackageJson" BeforeTargets="Build">
+        <ReadPackageJsonVersion PackageJsonPath="$(PackageJsonPath)">
+            <Output TaskParameter="Version" PropertyName="Version"/>
+        </ReadPackageJsonVersion>
+    </Target>
+
+    <PropertyGroup>
+        <Version>$(Version)</Version>
+        <Version Condition=" '$(Version)' == '' ">0.0.0</Version>
+    </PropertyGroup>
+
     <ItemGroup>
         <Compile Include="$(UnityScripts)/$(MSBuildProjectName)/**/*.cs">
             <Link>Unity/%(RecursiveDir)%(FileName)%(Extension)</Link>
         </Compile>
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="BoysheO.Extensions" Version="5.0.6" />
+        <PackageReference Include="BoysheO.Extensions" Version="5.0.6"/>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\BoysheO.Collection.Abstractions\BoysheO.Collection.Abstractions.csproj" />
+        <ProjectReference Include="..\BoysheO.Collection.Abstractions\BoysheO.Collection.Abstractions.csproj"/>
     </ItemGroup>
+
 </Project>
