@@ -5,5 +5,7 @@
     "BoysheO.Collection.Abstractions",
     "BoysheO.Collection2",
     "BoysehO.ObjectPool"
-  ]
+  ],
+  //指明sln所在目录
+  "SolutionPath": "D:/Repository/BoysheO.UnityLibrary/BoysheO.UnityLibrary.sln"
 }

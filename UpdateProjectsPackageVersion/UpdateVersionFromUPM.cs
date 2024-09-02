@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
+using BoysheO.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -43,7 +44,8 @@ public class UpdateVersionFromUPM
     public void Go()
     {
         var templ = File.ReadAllText("upm.props.templ");
-        v
+        var slnFile = _configuration.GetValue<string>("SolutionPath");
+        var dir = slnFile.AsPath().GetDirectoryName().Value;
         var ver = GetVersion(@"D:\Repository\BoysheO.UnityLibrary\UPMVerDetecterSolution\CustomVersionTest\src.json");
     }
 }
