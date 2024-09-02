@@ -80,14 +80,20 @@ namespace BoysheO.Collection2
             ThrowIfOrderExpired();
             _buffer.Push(item);
         }
-
+#if NETSTANDARD2_0
+        public bool TryPop(out T item)
+#else
         public bool TryPop([MaybeNullWhen(false)]out T item)
+#endif
         {
             ThrowIfOrderExpired();
             return _buffer.TryPop(out item);
         }
-
+#if NETSTANDARD2_0
+        public bool TryPeek(out T item)
+#else
         public bool TryPeek([MaybeNullWhen(false)]out T item)
+#endif
         {
             ThrowIfOrderExpired();
             return _buffer.TryPeek(out item);

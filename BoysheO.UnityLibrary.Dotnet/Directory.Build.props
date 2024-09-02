@@ -1,5 +1,9 @@
 <Project>
     <PropertyGroup>
         <UnityScripts>../../BoysheO.UnityLibrary.Unity/Assets/Scripts</UnityScripts>
+        <!--<PackageJsonPath>$(UnityScripts)\$(MSBuildProjectName)\package.json</PackageJsonPath>-->
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>BoysheO</Authors>
     </PropertyGroup>
 </Project>

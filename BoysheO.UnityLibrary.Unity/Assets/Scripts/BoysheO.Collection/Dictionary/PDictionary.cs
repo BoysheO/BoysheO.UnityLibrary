@@ -698,10 +698,17 @@ namespace BoysheO.Collection
                                 entriesSpan[index2].next = local.next;
                             local.hashCode = -1;
                             local.next = this._freeList;
+#if NETSTANDARD2_0
+                            if (global::RuntimeHelpers.IsReferenceOrContainsReferences<TKey>())
+                                local.key = default(TKey);
+                            if (global::RuntimeHelpers.IsReferenceOrContainsReferences<TValue>())
+                                local.value = default(TValue);
+#else
                             if (RuntimeHelpers.IsReferenceOrContainsReferences<TKey>())
                                 local.key = default(TKey);
                             if (RuntimeHelpers.IsReferenceOrContainsReferences<TValue>())
                                 local.value = default(TValue);
+#endif
                             this._freeList = index3;
                             ++this._freeCount;
                             ++this._version;
@@ -748,10 +755,17 @@ namespace BoysheO.Collection
                             value = local.value;
                             local.hashCode = -1;
                             local.next = this._freeList;
+#if NETSTANDARD2_0
+                            if (global::RuntimeHelpers.IsReferenceOrContainsReferences<TKey>())
+                                local.key = default(TKey);
+                            if (global::RuntimeHelpers.IsReferenceOrContainsReferences<TValue>())
+                                local.value = default(TValue);
+#else
                             if (RuntimeHelpers.IsReferenceOrContainsReferences<TKey>())
                                 local.key = default(TKey);
                             if (RuntimeHelpers.IsReferenceOrContainsReferences<TValue>())
                                 local.value = default(TValue);
+#endif
                             this._freeList = index3;
                             ++this._freeCount;
                             ++this._version;

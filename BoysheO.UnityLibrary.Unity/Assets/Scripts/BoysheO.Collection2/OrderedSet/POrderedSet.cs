@@ -16,7 +16,11 @@ namespace BoysheO.Collection2
         /// </summary>
         public PSortedList<T, ValueTuple> InternalData => _data;
 
-        [NotNull] public IComparer<T> Comparer => _data.Comparer;
+#if NETSTANDARD2_0
+#else
+        [NotNull]
+#endif
+        public IComparer<T> Comparer => _data.Comparer;
 #pragma warning disable CS3003
         public IReadOnlySpanCollection<T> AsReadOnlySpanCollection
         {
@@ -71,7 +75,8 @@ namespace BoysheO.Collection2
                     var x1 = l1[index];
                     _data.TryAdd(x1, default);
                 }
-            }else if (enumerable is IList<T> l2)
+            }
+            else if (enumerable is IList<T> l2)
             {
                 for (var index = 0; index < l2.Count; index++)
                 {

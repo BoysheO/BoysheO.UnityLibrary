@@ -1,0 +1,5 @@
+    //
+    // internal sealed class DoesNotReturnAttribute
+    // {
+    //     
+    // }

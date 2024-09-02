@@ -1,0 +1,9 @@
+{
+  //指定要更新upm.prop的工程
+  "Projects": [
+    "BoysheO.Collection",
+    "BoysheO.Collection.Abstractions",
+    "BoysheO.Collection2",
+    "BoysehO.ObjectPool"
+  ]
+}

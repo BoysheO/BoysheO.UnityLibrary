@@ -83,7 +83,10 @@ namespace BoysheO.Collection
                     {
                         if (_items != null)
                         {
-                            if (RuntimeHelpers.IsReferenceOrContainsReferences<T>()) _items.AsSpan(0, _size).Clear();
+                            if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
+                            {
+                                _items.AsSpan(0, _size).Clear();
+                            }
                             _pool.Return(_items);
                         }
 

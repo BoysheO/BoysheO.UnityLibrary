@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<!--    <UsingTask TaskName="ReadPackageJsonVersion" AssemblyFile="D:\Repository\BoysheO.UnityLibrary\UPMVerDetecterSolution\CustomVersion\bin\Debug\netstandard2.0\CustomVersion.dll"/>-->
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageJsonPath>"D:\Repository\BoysheO.UnityLibrary\UPMVerDetecterSolution\CustomVersionTest\src.json"</PackageJsonPath>
+    </PropertyGroup>
+
+<!--    <Target Name="ReadPackageJsonVersion" BeforeTargets="CoreCompile">-->
+<!--        <ReadPackageJsonVersion PackageJsonPath="$(PackageJsonPath)">-->
+<!--            <Output TaskParameter="Version"/>-->
+<!--        </ReadPackageJsonVersion>-->
+<!--    </Target>-->
+    
+
+</Project>

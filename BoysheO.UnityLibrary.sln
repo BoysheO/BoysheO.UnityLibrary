@@ -1,19 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoysheO.Collection.Abstractions", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection.Abstractions\BoysheO.Collection.Abstractions.csproj", "{1076ADF3-3A22-4934-9600-8923A51D4752}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection.Abstractions", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection.Abstractions\BoysheO.Collection.Abstractions.csproj", "{1076ADF3-3A22-4934-9600-8923A51D4752}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoysheO.ObjectPool", "BoysheO.UnityLibrary.Dotnet\BoysheO.ObjectPool\BoysheO.ObjectPool.csproj", "{0C2F72EE-EDB7-4B1A-B14D-408AEA67D010}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.ObjectPool", "BoysheO.UnityLibrary.Dotnet\BoysheO.ObjectPool\BoysheO.ObjectPool.csproj", "{0C2F72EE-EDB7-4B1A-B14D-408AEA67D010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoysheO.Collection", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection\BoysheO.Collection.csproj", "{6646F0E0-2827-4275-869A-FE0B0DBAC313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection\BoysheO.Collection.csproj", "{6646F0E0-2827-4275-869A-FE0B0DBAC313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoysheO.Collection2", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection2\BoysheO.Collection2.csproj", "{6721DFC4-31F8-42BC-BE74-21DC3300AAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection2", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection2\BoysheO.Collection2.csproj", "{6721DFC4-31F8-42BC-BE74-21DC3300AAFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{DA9F9289-6F67-435C-9F38-44264DE7B54F}"
 	ProjectSection(SolutionItems) = preProject
 		BoysheO.UnityLibrary.Dotnet\Directory.Build.props = BoysheO.UnityLibrary.Dotnet\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomVersion", "CustomVersion\CustomVersion.csproj", "{41A5188A-014A-4FF8-A521-08D1EE3006B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBuildConsoleExample", "MSBuildConsoleExample\MSBuildConsoleExample.csproj", "{224CF3D6-A612-4D4F-9B24-4B0175124FA8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateProjectsPackageVersion", "UpdateProjectsPackageVersion\UpdateProjectsPackageVersion.csproj", "{116BD127-8509-4A18-8BE5-6F17D4F6A6B0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "netstand20Adapter", "netstand20Adapter\netstand20Adapter.shproj", "{D0581E31-1983-4EF3-A348-7F428AFBDA40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,9 +44,21 @@ Global
 		{6721DFC4-31F8-42BC-BE74-21DC3300AAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6721DFC4-31F8-42BC-BE74-21DC3300AAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6721DFC4-31F8-42BC-BE74-21DC3300AAFB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41A5188A-014A-4FF8-A521-08D1EE3006B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41A5188A-014A-4FF8-A521-08D1EE3006B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41A5188A-014A-4FF8-A521-08D1EE3006B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41A5188A-014A-4FF8-A521-08D1EE3006B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{224CF3D6-A612-4D4F-9B24-4B0175124FA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{224CF3D6-A612-4D4F-9B24-4B0175124FA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{224CF3D6-A612-4D4F-9B24-4B0175124FA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{224CF3D6-A612-4D4F-9B24-4B0175124FA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{116BD127-8509-4A18-8BE5-6F17D4F6A6B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{116BD127-8509-4A18-8BE5-6F17D4F6A6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{116BD127-8509-4A18-8BE5-6F17D4F6A6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{116BD127-8509-4A18-8BE5-6F17D4F6A6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		netstand20Adapter\netstand20Adapter.projitems*{6721dfc4-31f8-42bc-be74-21dc3300aafb}*SharedItemsImports = 5
+		netstand20Adapter\netstand20Adapter.projitems*{a11c5cdb-d315-43f6-8cf0-eff12f21dbdc}*SharedItemsImports = 5
+		netstand20Adapter\netstand20Adapter.projitems*{d0581e31-1983-4ef3-a348-7f428afbda40}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
