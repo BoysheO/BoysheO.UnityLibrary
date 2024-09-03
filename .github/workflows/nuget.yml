@@ -14,8 +14,11 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
 
-      - name: Build binaries
-        run: dotnet build -c Release src/BoysheO.Extensions.sln
+      - name: Update nuget version
+        run: dotnet run D:/Repository/BoysheO.UnityLibrary/BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion
+
+      - name: Build all projects
+        run: dotnet build -c Release BoysheO.UnityLibrary.Dotnet/BoysheO.UnityLibrary.sln
 
       - name: Publish to Nuget 
         run: dotnet nuget push **/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate -n 
