@@ -1,24 +1,36 @@
 name: nuget
 on:
   push:
-    branches:
-      - main # Default release branch
+    tags:
+      - '* v*.*.*' # 监听形如 abc v1.0.0 的标签
       
 jobs:
   publish:
-    name: build, pack & publish
+    name: build, pack & publish to nuget
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
 
       - name: Update nuget version
-        run: dotnet run D:/Repository/BoysheO.UnityLibrary/BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion
+        run: dotnet run BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion
+
+      - name: Get project path
+        id: get_project_path
+        run: |
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          PROJECT_DIR="BoysheO.UnityLibrary.Dotnet/${TAG_NAME%% v*}"
+          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+
+      - name: Build project
+        run: dotnet build ${{ env.PROJECT_DIR }}/*.csproj --configuration Release
 
       - name: Build all projects
         run: dotnet build -c Release BoysheO.UnityLibrary.Dotnet/BoysheO.UnityLibrary.sln
 
-      - name: Publish to Nuget 
-        run: dotnet nuget push **/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}} --skip-duplicate -n 
+      - name: Push to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./nuget/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
