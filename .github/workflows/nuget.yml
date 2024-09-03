@@ -2,7 +2,7 @@ name: nuget
 on:
   push:
     tags:
-      - '* v*.*.*' # 监听形如 abc v1.0.0 的标签
+      - '*' # 监听形如 abc v1.0.0 的标签
       
 jobs:
   publish:
