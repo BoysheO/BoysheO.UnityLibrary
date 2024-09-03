@@ -20,3 +20,4 @@ builder.ConfigureServices(v =>
 var host = builder.Build();
 var handle = host.Services.GetRequiredService<UpdateVersionFromUPM>();
 handle.Go();
+Console.WriteLine("done");
