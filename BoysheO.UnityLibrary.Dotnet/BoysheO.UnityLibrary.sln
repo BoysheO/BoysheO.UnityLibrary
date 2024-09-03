@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateProjectsPackageVersio
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "netstand20Adapter", "netstand20Adapter\netstand20Adapter.shproj", "{D0581E31-1983-4EF3-A348-7F428AFBDA40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResolveTag", "ResolveTag\ResolveTag.csproj", "{26829D0D-4661-4EC5-A64D-8C2E01EB8362}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{116BD127-8509-4A18-8BE5-6F17D4F6A6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{116BD127-8509-4A18-8BE5-6F17D4F6A6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{116BD127-8509-4A18-8BE5-6F17D4F6A6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26829D0D-4661-4EC5-A64D-8C2E01EB8362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26829D0D-4661-4EC5-A64D-8C2E01EB8362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26829D0D-4661-4EC5-A64D-8C2E01EB8362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26829D0D-4661-4EC5-A64D-8C2E01EB8362}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

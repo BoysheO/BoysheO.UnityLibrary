@@ -16,18 +16,14 @@ jobs:
         with:
           dotnet-version: '8.x'
 
-      - name: Update nuget version2
-        run: cd BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion
-
-      - name: Update nuget version3
+      - name: Update nuget version
         run: dotnet run
+        working-directory: BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion
 
       - name: Get project path
         id: get_project_path
-        run: |
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          PROJECT_DIR="BoysheO.UnityLibrary.Dotnet/${TAG_NAME%% v*}"
-          echo "PROJECT_DIR=$PROJECT_DIR" >> $GITHUB_ENV
+        run: dotnet run -- BoysheO.Collection.Abstractions_0.0.1>> $GITHUB_ENV
+        working-directory: BoysheO.UnityLibrary.Dotnet/ResolveTag
 
       - name: Build project
         run: dotnet build ${{ env.PROJECT_DIR }}/*.csproj --configuration Release

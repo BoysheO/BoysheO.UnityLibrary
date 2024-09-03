@@ -1,11 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UpdateProjectsPackageVersion;
 
 Console.WriteLine("Hello, World!");
+Console.WriteLine(AppContext.BaseDirectory);
+Console.WriteLine(Directory.GetCurrentDirectory());
+Console.WriteLine(Assembly.GetExecutingAssembly().Location);
 
 var builder  = Host.CreateDefaultBuilder();
 builder.ConfigureAppConfiguration(v =>
