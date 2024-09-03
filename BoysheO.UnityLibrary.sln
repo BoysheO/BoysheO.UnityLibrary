@@ -56,9 +56,12 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4FA11D3D-C7A7-489B-840A-95B8879B4480}
+	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		netstand20Adapter\netstand20Adapter.projitems*{6721dfc4-31f8-42bc-be74-21dc3300aafb}*SharedItemsImports = 5
-		netstand20Adapter\netstand20Adapter.projitems*{a11c5cdb-d315-43f6-8cf0-eff12f21dbdc}*SharedItemsImports = 5
+		netstand20Adapter\netstand20Adapter.projitems*{cb612e1c-87c2-4a37-a887-d32466b39fbf}*SharedItemsImports = 5
 		netstand20Adapter\netstand20Adapter.projitems*{d0581e31-1983-4ef3-a348-7f428afbda40}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

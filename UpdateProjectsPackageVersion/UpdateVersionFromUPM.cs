@@ -40,12 +40,25 @@ public class UpdateVersionFromUPM
         text = _regex.Replace(text, version, 1);
         File.WriteAllText(propsFile, text);
     }
-    
+
     public void Go()
     {
         var templ = File.ReadAllText("upm.props.templ");
-        var slnFile = _configuration.GetValue<string>("SolutionPath");
-        var dir = slnFile.AsPath().GetDirectoryName().Value;
-        var ver = GetVersion(@"D:\Repository\BoysheO.UnityLibrary\UPMVerDetecterSolution\CustomVersionTest\src.json");
+        var slnFile = _configuration.GetValue<string>("SolutionPath") ??
+                      throw new Exception("missing SolutionPath entry in configuration");
+        var dir = slnFile.AsPath().GetDirectoryName().Value.Value.Replace(@"\","/");
+        var projects = _configuration.GetSection("Projects").Get<string[]>() ??
+                       throw new Exception("missing Projects entry in configuration");
+        foreach (var project in projects)
+        {
+            var upmProps = dir + $"/BoysheO.UnityLibrary.Dotnet/{project}/upm.props";
+            var pckJson = dir + $"/BoysheO.UnityLibrary.Unity/Assets/Scripts/{project}/package.json";
+            var version = GetVersion(pckJson);
+            var upmPropsContent = templ.Format(version);
+            File.WriteAllText(upmProps, upmPropsContent);
+            _logger.LogInformation("write success:{upmProps}", upmProps);
+        }
+
+        _logger.LogInformation("done");
     }
 }

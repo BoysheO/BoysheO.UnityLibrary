@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <PropertyGroup>
-        <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
-        <HasSharedItems>true</HasSharedItems>
-        <SharedGUID>d0581e31-1983-4ef3-a348-7f428afbda40</SharedGUID>
-    </PropertyGroup>
-    <PropertyGroup Label="Configuration">
-        <Import_RootNamespace>netstand20Adapter</Import_RootNamespace>
-    </PropertyGroup>
-    <ItemGroup>
-        <Compile Include="$(MSBuildThisFileDirectory)/**/*.cs">
-            <Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
-        </Compile>
-    </ItemGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>d0581e31-1983-4ef3-a348-7f428afbda40</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>netstand20Adapter</Import_RootNamespace>
+  </PropertyGroup>
+<!--  <ItemGroup>-->
+<!--    <Compile Include="$(MSBuildThisFileDirectory)RuntimeHelpers.cs" />-->
+<!--  </ItemGroup>-->
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)/**/*.cs" />
+  </ItemGroup>
 </Project>

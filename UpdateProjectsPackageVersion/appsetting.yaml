@@ -1,0 +1,8 @@
+#  指定要更新upm.prop的工程
+Projects:
+  - BoysheO.Collection
+  - BoysheO.Collection.Abstractions
+  - BoysheO.Collection2
+  - BoysheO.ObjectPool
+#  指明sln所在目录
+SolutionPath: 'D:/Repository/BoysheO.UnityLibrary/BoysheO.UnityLibrary.sln'

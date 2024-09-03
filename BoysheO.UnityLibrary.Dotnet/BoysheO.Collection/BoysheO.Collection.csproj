@@ -20,7 +20,7 @@
     <ItemGroup>
         <ProjectReference Include="..\BoysheO.Collection.Abstractions\BoysheO.Collection.Abstractions.csproj"/>
     </ItemGroup>
-    <Import Project="..\..\netstand20Adapter\netstand20Adapter.projitems" Label="Shared"/>
     <Import Project="upm.props"/>
+    <Import Project="..\..\netstand20Adapter\netstand20Adapter.projitems" Label="Shared" />
 
 </Project>
