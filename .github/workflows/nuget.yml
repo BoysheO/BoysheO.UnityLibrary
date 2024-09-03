@@ -17,7 +17,10 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Update nuget version2
-        run: cd BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion & dotnet run
+        run: cd BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion
+
+      - name: Update nuget version3
+        run: dotnet run
 
       - name: Get project path
         id: get_project_path
