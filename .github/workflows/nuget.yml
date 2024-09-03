@@ -26,12 +26,15 @@ jobs:
         working-directory: BoysheO.UnityLibrary.Dotnet/ResolveTag
 
       - name: Build project
-        run: dotnet build ${{ env.PROJECT_DIR }}/*.csproj --configuration Release
+        run: dotnet build ${{ env.PROJECT_DIR }}/$PACKAGE_NAME.csproj --configuration Release
 
-      - name: Build all projects
-        run: dotnet build -c Release BoysheO.UnityLibrary.Dotnet/BoysheO.UnityLibrary.sln
+      # - name: Build all projects
+      #   run: dotnet build -c Release BoysheO.UnityLibrary.Dotnet/BoysheO.UnityLibrary.sln
+
+      - name: gen nuget package path
+        run: echo NUGETPCK=${{ env.PROJECT_DIR }}/bin/Release/$PACKAGE_NAME.$PACKAGE_VER.nupkg>> $GITHUB_ENV
 
       - name: Push to NuGet
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: dotnet nuget push ./nuget/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push $NUGETPCK --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
