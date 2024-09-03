@@ -19,5 +19,5 @@
       <ProjectReference Include="..\BoysheO.Collection\BoysheO.Collection.csproj" />
       <ProjectReference Include="..\BoysheO.ObjectPool\BoysheO.ObjectPool.csproj" />
     </ItemGroup>
-    <Import Project="..\..\netstand20Adapter\netstand20Adapter.projitems" Label="Shared" />
+    <Import Project="..\netstand20Adapter\netstand20Adapter.projitems" Label="Shared" />
 </Project>

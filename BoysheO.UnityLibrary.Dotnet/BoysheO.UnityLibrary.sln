@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection.Abstractions", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection.Abstractions\BoysheO.Collection.Abstractions.csproj", "{1076ADF3-3A22-4934-9600-8923A51D4752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection.Abstractions", "BoysheO.Collection.Abstractions\BoysheO.Collection.Abstractions.csproj", "{1076ADF3-3A22-4934-9600-8923A51D4752}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.ObjectPool", "BoysheO.UnityLibrary.Dotnet\BoysheO.ObjectPool\BoysheO.ObjectPool.csproj", "{0C2F72EE-EDB7-4B1A-B14D-408AEA67D010}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.ObjectPool", "BoysheO.ObjectPool\BoysheO.ObjectPool.csproj", "{0C2F72EE-EDB7-4B1A-B14D-408AEA67D010}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection\BoysheO.Collection.csproj", "{6646F0E0-2827-4275-869A-FE0B0DBAC313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection", "BoysheO.Collection\BoysheO.Collection.csproj", "{6646F0E0-2827-4275-869A-FE0B0DBAC313}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection2", "BoysheO.UnityLibrary.Dotnet\BoysheO.Collection2\BoysheO.Collection2.csproj", "{6721DFC4-31F8-42BC-BE74-21DC3300AAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoysheO.Collection2", "BoysheO.Collection2\BoysheO.Collection2.csproj", "{6721DFC4-31F8-42BC-BE74-21DC3300AAFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{DA9F9289-6F67-435C-9F38-44264DE7B54F}"
 	ProjectSection(SolutionItems) = preProject
-		BoysheO.UnityLibrary.Dotnet\Directory.Build.props = BoysheO.UnityLibrary.Dotnet\Directory.Build.props
+		BoysheO.UnityLibrary.Dotnet\Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSBuildConsoleExample", "MSBuildConsoleExample\MSBuildConsoleExample.csproj", "{224CF3D6-A612-4D4F-9B24-4B0175124FA8}"

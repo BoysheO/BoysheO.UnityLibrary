@@ -87,7 +87,11 @@ namespace BoysheO.Collection2
 #endif
         {
             ThrowIfOrderExpired();
+#if NETSTANDARD2_0
+            return _buffer.TryPop(out item!);
+#else
             return _buffer.TryPop(out item);
+#endif
         }
 #if NETSTANDARD2_0
         public bool TryPeek(out T item)
@@ -96,7 +100,11 @@ namespace BoysheO.Collection2
 #endif
         {
             ThrowIfOrderExpired();
+#if NETSTANDARD2_0
+            return _buffer.TryPeek(out item!);
+#else
             return _buffer.TryPeek(out item);
+#endif
         }
 
         public void RemoveLast()
