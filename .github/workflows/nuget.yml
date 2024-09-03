@@ -22,7 +22,8 @@ jobs:
 
       - name: Get project path
         id: get_project_path
-        run: dotnet run -- BoysheO.Collection.Abstractions_0.0.1>> $GITHUB_ENV
+        run: dotnet run -- ${GITHUB_REF#refs/tags/}>> $GITHUB_ENV
+        # 生成PACKAGE_NAME PACKAGE_VER PROJECT_DIR三个变量
         working-directory: BoysheO.UnityLibrary.Dotnet/ResolveTag
 
       - name: Build project
