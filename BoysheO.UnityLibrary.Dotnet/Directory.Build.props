@@ -2,7 +2,6 @@
     <PropertyGroup>
         <UnityScripts>../../BoysheO.UnityLibrary.Unity/Assets/Scripts</UnityScripts>
         <Nullable>enable</Nullable>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>BoysheO</Authors>
     </PropertyGroup>
 </Project>
