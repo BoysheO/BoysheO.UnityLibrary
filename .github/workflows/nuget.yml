@@ -13,9 +13,11 @@ jobs:
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
 
       - name: Update nuget version
-        run: dotnet run BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion
+        run: dotnet run --project BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion/UpdateProjectsPackageVersion.csproj
 
       - name: Get project path
         id: get_project_path
