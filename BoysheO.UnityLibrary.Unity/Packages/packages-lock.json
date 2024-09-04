@@ -101,6 +101,15 @@
       },
       "url": "https://packages.unity.cn"
     },
+    "com.unity.asset-store-validation": {
+      "version": "0.1.3",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.2"
+      },
+      "url": "https://packages.unity.cn"
+    },
     "com.unity.burst": {
       "version": "1.8.12",
       "depth": 3,
@@ -175,6 +184,13 @@
       "dependencies": {},
       "url": "https://packages.unity.cn"
     },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.cn"
+    },
     "com.unity.test-framework": {
       "version": "1.1.33",
       "depth": 0,
@@ -215,6 +231,17 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
+    },
+    "com.unity.upm.develop": {
+      "version": "https://github.com/BoysheO/com.unity.upm.develop.git#0.5.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.20",
+        "com.unity.asset-store-validation": "0.1.3",
+        "com.unity.nuget.newtonsoft-json": "2.0.2"
+      },
+      "hash": "0bd55313d100df6bc99fdf4321d6da6f3679f5fe"
     },
     "com.unity.visualscripting": {
       "version": "1.9.1",
