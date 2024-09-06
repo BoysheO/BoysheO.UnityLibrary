@@ -1,0 +1,11 @@
+{
+  "name": "TinyStateMachine",
+  "noEngineReferences": true,
+  "references": [
+    "BoysheO.Collection",
+    "BoysheO.Collection2"
+  ],
+  "compilationOptions": {
+    "nullable": "enable"
+  }
+}
