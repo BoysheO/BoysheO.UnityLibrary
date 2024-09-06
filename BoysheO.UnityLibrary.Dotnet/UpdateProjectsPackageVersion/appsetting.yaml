@@ -4,6 +4,6 @@ Projects:
   - BoysheO.Collection.Abstractions
   - BoysheO.Collection2
   - BoysheO.ObjectPool
-  - TinyStateMachine
+  - BoysheO.TinyStateMachine
 ##  指明sln所在目录
 #SolutionPath: 'D:/Repository/BoysheO.UnityLibrary/BoysheO.UnityLibrary.sln'

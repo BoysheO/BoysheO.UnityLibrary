@@ -24,7 +24,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "netstand20Adapter", "netsta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResolveTag", "ResolveTag\ResolveTag.csproj", "{26829D0D-4661-4EC5-A64D-8C2E01EB8362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyStateMachine", "TinyStateMachine\TinyStateMachine.csproj", "{F0BF23EF-0F7B-4C70-8A70-CC993EC8326F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoysheO.TinyStateMachine", "BoysheO.TinyStateMachine\BoysheO.TinyStateMachine.csproj", "{F0BF23EF-0F7B-4C70-8A70-CC993EC8326F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
