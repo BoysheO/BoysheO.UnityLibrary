@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using BoysheO.Extensions;
 
 namespace BoysheO.ObjectPool
 {
@@ -16,13 +15,16 @@ namespace BoysheO.ObjectPool
 
         public T Rent()
         {
-            if (_plist.TryPop(out T? item)) return item;
-            return new();
+            var len = _plist.Count;
+            if (len == 0) return new();
+            var last = _plist[len-1];
+            _plist.RemoveAt(len-1);
+            return last;
         }
 
         public void Return(T item)
         {
-            _plist.Push(item);
+            _plist.Add(item);
         }
     }
 }

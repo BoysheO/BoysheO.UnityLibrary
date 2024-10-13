@@ -1,6 +1,14 @@
 {
-  "name": "BoysheO.ObjectPool",
-  "references": [
-    "BoysheO.Extensions"
-  ]
+    "name": "BoysheO.ObjectPool",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
