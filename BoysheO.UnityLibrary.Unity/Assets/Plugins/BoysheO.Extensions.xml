@@ -1,0 +1,1200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BoysheO.Extensions</name>
+    </assembly>
+    <members>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToHexText(System.Collections.Generic.IEnumerable{System.Byte},System.Text.StringBuilder)">
+            <summary>
+            Get Hex string from bytes like "A1 BE C1".
+            </summary>
+            <param name="bytes">The collection of bytes to be converted to a hex string.</param>
+            <param name="usingStringBuilder">Optional StringBuilder for improved performance by reducing allocations.</param>
+            <returns>A string representing the hex values of the bytes.</returns>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToHexText(System.Collections.Generic.IList{System.Byte})">
+            <summary>
+                Get Hex string from bytes like "A1 BE C1".
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToHexText(System.Byte)">
+            <summary>
+                Get Hex string from byte like "A1","0F".<br />
+                *Performance tips:it's same to call ToString("X2").
+                If call in loop,suggestion is use <see cref="M:BoysheO.Util.ByteUtil.ByteToHexChar(System.Byte,System.Span{System.Char})"/> instead 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToHexText(System.ReadOnlySpan{System.Byte})">
+            <summary>
+                Get Hex string from bytes like "A1 BE C1".
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToHexText(System.Byte[])">
+            <summary>
+                Get Hex string from bytes like "A1 BE C1".
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToHexText(System.ArraySegment{System.Byte})">
+            <summary>
+                Get Hex string from bytes like "A1 BE C1".
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToBinText(System.ReadOnlySpan{System.Byte})">
+            <summary>
+                Get binText from byteSpan.ex."01001"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToBinText(System.Byte)">
+            <summary>
+                Get binText from a byte.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.ToReverseArray(System.ReadOnlySpan{System.Byte})">
+            <summary>
+                Copy the span to a new Array reversed.<br />
+                *Performance tips:If you don't need to get a new ary,use <see cref="M:System.Array.Reverse(System.Array)"/> better.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ByteExtensions.AsMemoryByteSpan``1(``0@)">
+            <summary>
+                Look through the value as bytes in memory.<br />
+                *<b>UNSAFE</b>:Changing the return value causes the parameter value changed.
+                If you change the string,the program maybe crash.The suggestion
+                is use this for debug only.And,I don't promise the return value
+                is same in different hardware environment.Only the base value
+                can be the parameters.<br />
+                将该值类型转换成内存中byte表示，无复制,仅限基础类型，否则会异常.
+                *不安全：修改返回的span数组会修改初始值.在不清楚自己在做什么的时候不要修改返回值
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharExtensions.Is0to9(System.Char)">
+            <summary>
+            Determine the char is in '0'-'9' without culture.<br />
+            <see cref="M:System.Char.IsDigit(System.Char)"/>has more logic.
+            *Performance tips:very fast in net48,but fail to against char.IsDigital() in net6.0 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharExtensions.To0To9(System.Char)">
+            <summary>
+            Convert '0'-'9' to byte 0-9
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharExtensions.Isatoz(System.Char)">
+            <summary>
+            Determine the char is in 'a'-'z' without culture.<br />
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharExtensions.IsAtoZ(System.Char)">
+            <summary>
+            Determine the char is in 'A'-'Z' without culture.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharExtensions.IsEnglishLetter(System.Char)">
+            <summary>
+            Determine the char is in [a-zA-Z] without culture.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharExtensions.ToUpper(System.Char)">
+            <summary>
+            Convert [a-zA-Z] to [A-Z]
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharExtensions.ToLower(System.Char)">
+            <summary>
+            Convert [a-zA-Z] to [a-z]
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharExtensions.CovertAZazTo26(System.Char)">
+            <summary>
+            Convert char[a-zA-Z] to [1,26]<br />
+            It's useful for convert Excel col number ABC.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharSpanExtensions.ParseToPositiveInt(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Convert chars '123' to int 123.<br />
+            <b>*UNSAFE</b>:make sure chars is all digit char.Not '-123' '12.3'<br />
+            This method is more faster than <see cref="M:System.Int32.Parse(System.String)"/> 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharSpanExtensions.SplitAsIntPoolArray(System.ReadOnlySpan{System.Char},System.Int32,System.Int32[]@)">
+            <summary>
+            Identifies numbers in string.<br />
+            The char not number and + - will be dealt as separator<br />
+            NOT SUPPORT any calculations in string<br />
+            ex."a123b46.21+45-87"=>{123,46,21,45,-87}
+            </summary>
+            <param name="chars">source</param>
+            <param name="initBuffSize">any value in [1,+).</param>
+            <param name="ints">result</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">initBuffSize not in [1,+) or any math value in chars too big</exception>
+        </member>
+        <member name="M:BoysheO.Extensions.CharSpanExtensions.ParseToPositiveLong(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Convert chars "123" to long 123<br />
+            <b>*UNSAFE</b>:make sure chars is all digit char.Not '-123' '12.3'<br />
+            This method is more faster than <see cref="M:System.Int64.Parse(System.String)"/> 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharSpanExtensions.ToNewString(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Creates a string from characters.
+            You should use <see cref="M:System.ReadOnlySpan`1.ToString"/> for most cases.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharSpanExtensions.SkipCount(System.ReadOnlySpan{System.Char},System.String)">
+            <summary>
+            Slice the source.
+            ex."HelloWorld".SkipCount("Hello") => "World"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.CharSpanExtensions.SkipTailCount(System.ReadOnlySpan{System.Char},System.String)">
+            <summary>
+            Slice the source.
+            ex."HelloWorld".SkipLastCount("World") => "Hello"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.DateTimeOffsetExtensions.GetLastMonday0AM(System.DateTimeOffset)">
+            <summary>
+            Get last Monday 0 AM.If v is Monday 0 am,return itself.<br />
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.DateTimeOffsetExtensions.GetCurWeekDay0AM(System.DateTimeOffset,System.DayOfWeek)">
+            <summary>
+            Calculate the week day 0 am current week.<br />
+            *Base on ISO 8601,week starts from Monday.It's very important.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.DateTimeOffsetExtensions.GetCurDay0Am(System.DateTimeOffset)">
+            <summary>
+            Get current day 0 am.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.DateTimeOffsetExtensions.GetNextDay0Am(System.DateTimeOffset)">
+            <summary>
+            Get next day 0 am.
+            到下一天凌晨时间 （上午12点，也就是0点）
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.DateTimeOffsetExtensions.GetCurHour0(System.DateTimeOffset)">
+            <summary>
+            Get current hour 0min0sec.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.DateTimeOffsetExtensions.IsExpire(System.DateTimeOffset,System.DateTimeOffset)">
+            <summary>
+            Is the time is after now.<br />
+            Useful to reduce mistake and make the code reading comfortable. 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.DateTimeOffsetExtensions.IsExpire(System.DateTimeOffset)">
+            <summary>
+            Is the time is after <see cref="P:System.DateTimeOffset.Now"/>.<br />
+            Useful to reduce mistake and make the code reading comfortable. 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.DoubleExtension.CeilToInt(System.Double)">
+            <summary>
+                Returns the smallest integer greater to or equal to f.<br />
+                ex. 1.2f=>2
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumerableExtensions.IsInclude``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Determines whether all elements of <paramref name="another"/> are included in <paramref name="source"/> or if both collections are equal.
+            </summary>
+            <remarks>
+            Performance tips:
+            This method uses LINQ. The <paramref name="source"/> collection will be converted to a set immediately.
+            The <paramref name="another"/> collection may be fully traversed.
+            </remarks>
+            <typeparam name="T">The type of elements in the collections.</typeparam>
+            <param name="source">The collection to check against.</param>
+            <param name="another">The collection to check for inclusion in <paramref name="source"/>.</param>
+            <returns>
+            <c>true</c> if <paramref name="source"/> includes all elements of <paramref name="another"/> or if both collections are equal; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumerableExtensions.IsSupersetOf``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Determines whether <paramref name="source"/> is a superset of <paramref name="another"/> or if both collections are equal.
+            </summary>
+            <remarks>
+            Performance tips:
+            This method uses LINQ. The <paramref name="source"/> collection will be converted to a set immediately.
+            The <paramref name="another"/> collection may be fully traversed.
+            </remarks>
+            <typeparam name="T">The type of elements in the collections.</typeparam>
+            <param name="source">The collection to check against.</param>
+            <param name="another">The collection to check for inclusion in <paramref name="source"/>.</param>
+            <returns>
+            <c>true</c> if <paramref name="source"/> is a superset of all elements of <paramref name="another"/> or if both collections are equal; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumerableExtensions.CopyTo``1(System.Collections.Generic.IEnumerable{``0},System.Span{``0})">
+            <summary>
+            Read elements in arg:source and write to arg:span until arg:span or arg:source end.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumerableExtensions.OrderBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+                Order by key.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumerableExtensions.SelectMany``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+                Same as SelectMany(v=>v).
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumerableExtensions.FirstOrDefault``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},``0@)">
+            <summary>
+            Find the element and return index.<br />
+            return -1 if not found.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumerableExtensions.TryPop``1(System.Collections.Generic.IReadOnlyList{``0},``0@)">
+            <summary>
+            use list as stack
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumerableExtensions.Push``1(System.Collections.Generic.IList{``0},``0)">
+            <summary>
+            use list as stack
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.EnumExtensions.AsInt``1(``0)">
+            <summary>
+            简易枚举转int。
+            *如果具体的枚举实现范围超过int，例如long，那么结果将会错误且没有提示
+            可以预料这个API会被大量使用，而long、ulong作为枚举值的情形少之又少，基于此考量编写了此API
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.FloatExtension.CeilToInt(System.Single)">
+            <summary>
+                Returns the smallest integer greater to or equal to f.
+                ex. 1.2f=>2
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.PositiveIntegerToEachDigit(System.Int32,System.Span{System.Int32})">
+            <summary>
+            Split int 123=>0,0,0,0,0,0,0,1,2,3
+            </summary>
+            <param name="value">source</param>
+            <param name="buffer">buffer len must be 10</param>
+            <returns>count of bytes write</returns>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsValidIndex``1(System.Int32,System.Collections.Generic.ICollection{``0})">
+            <summary>
+            value &gt; 0 &amp;&amp; value &lt; collection.Count
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int32,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int64,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Double,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Single,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt32,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.UInt16,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Int16,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Byte,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.Int32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.Int64)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.Double)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.Single)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.UInt32)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.UInt16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.Int16)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.Byte)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.IntExtensions.IsInRange(System.Int32,System.Decimal,System.Decimal)">
+            <summary>
+            Is same to value &lt;= minInclusive &amp;&amp; value &gt; = maxInclusive
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.MemoryExtensions.Panning``1(System.Span{``0},System.Int32,System.Func{System.Int32,``0})">
+            <summary>
+                Move every elements in arg:span to left side.<br />
+                ex.int{1,2,3,4,5}.Panning(1) => int{2,3,4,5,0}<br />
+                ex.int{1,2,3,4,5}.Panning(-1) => int{0,1,2,3,4}<br />
+            </summary>
+            <exception cref="T:System.ArgumentException">count not be 0</exception>
+        </member>
+        <member name="M:BoysheO.Extensions.ObjectExtensions.WarpToArray``1(``0)">
+            <summary>
+                Warp a element to an array.<br />
+                The method is designed not to break the chained API
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.ObjectExtensions.GetDescription(System.Enum)">
+            <summary>
+                Get <see cref="P:System.ComponentModel.DescriptionAttribute.Description" /> by reflection.<br />
+                * GetCustomAttribute is not support in Unity IL2CPP,so don't use this in IL2CPP
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StreamExtensions.GetAllBytesFromOffset0(System.IO.Stream)">
+            <summary>
+            Seek to 0 and read all bytes.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.JoinAsOneString(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+                Same to string.Join
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.RemoveSpaces(System.String)">
+            <summary>
+                return new string without any space
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.ReplaceByRegex(System.String,System.String,System.String)">
+            <summary>
+                将字符串视作string列表，此函数包含了忽略元素两端空白字符、以中英文逗号为分割点的功能;不忽略双逗号时的""字符串
+                实测效率不如replace+split
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.IsMatch(System.String,System.String)">
+            <summary>
+                调用<see cref="M:System.Text.RegularExpressions.Regex.IsMatch(System.String,System.String,System.Text.RegularExpressions.RegexOptions)" />验证,op=
+                <see cref="F:System.Text.RegularExpressions.RegexOptions.CultureInvariant" />
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.IsMatch(System.String,System.Text.RegularExpressions.Regex)">
+            <summary>
+                调用regex验证
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.ToRawBytes(System.String,System.Boolean)">
+            <summary>
+                Put every chars to bytes array.<br />
+                ex."123".ToRawBytes() => {31,32,33}
+            </summary>
+            <exception cref="T:System.InvalidCastException">any char in arg:srt out of byte</exception>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.ToRawBytes(System.String,System.ArraySegment{System.Byte},System.Boolean)">
+            <summary>
+                Put every chars to bytes array.<br />
+                *Performance tips:The method perform similarly to <see cref="M:BoysheO.Extensions.StringExtensions.ToRawBytes(System.String,System.Boolean)"/>
+                ex."123".ToRawBytes() => {31,32,33}
+            </summary>
+            <exception cref="T:System.InvalidCastException">any char in arg:srt out of byte</exception>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.ToRawBytes(System.String,System.Byte[],System.Int32,System.Int32,System.Boolean)">
+            <summary>
+                Put every chars to bytes array.<br />
+                *Performance tips:The method perform similarly to <see cref="M:BoysheO.Extensions.StringExtensions.ToRawBytes(System.String,System.Boolean)"/>
+                ex."123".ToRawBytes() => {31,32,33}
+            </summary>
+            <exception cref="T:System.InvalidCastException">any char in arg:srt out of byte</exception>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.ToRawString(System.ReadOnlySpan{System.Byte})">
+            <summary>
+                 Put every bytes to char array as string<br />
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.MemoryToString(System.ReadOnlySpan{System.Byte})">
+            <summary>
+                Convert the source as new string directly.<br />
+                If the source is utf16,the method can return string readable. 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.MakeFirstCharUpperOrNot(System.String)">
+            <summary>
+            Make first char upper or not without culture<br />
+            ex."abc"=>"Abc","ABC"=>"ABC"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.MakeFirstCharLowerOrNot(System.String)">
+            <summary>
+            Make first char lower or not without culture<br />
+            ex."abc"=>"abc","ABC"=>"aBC"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.ParseToInt(System.String)">
+            <summary>
+            Same as <see cref="M:System.Int32.Parse(System.String)"/><br />
+            *Performance tips:If you can make sure string has number char only,
+            you can use <see cref="M:BoysheO.Extensions.StringExtensions.ParseToPositiveInt(System.String)"/> 4 times faster.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.ParseToPositiveInt(System.String)">
+            <summary>
+            Convert chars '123' to int 123.<br />
+            <b>*UNSAFE</b>:make sure chars is all digit char.Not '-123' '12.3'<br />
+            This method is more faster than <see cref="M:System.Int32.Parse(System.String)"/> 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.ParseToPositiveLong(System.String)">
+            <summary>
+            Convert chars "123" to long 123<br />
+            <b>*UNSAFE</b>:make sure chars is all digit char.Not '-123' '12.3'<br />
+            This method is more faster than <see cref="M:System.Int64.Parse(System.String)"/> 
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.Format(System.String,System.Object)">
+            <summary>
+            Same as string.Format
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.Format(System.String,System.Object,System.Object)">
+            <summary>
+            Same as string.Format
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.Format(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Same as string.Format
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.StringExtensions.Format(System.String,System.Object[])">
+            <summary>
+            Same as string.Format
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.TypeExtensions.IsClassAndImplement(System.Type,System.Type)">
+            <summary>
+                Determine the type is implement the another type (interface or class,GenericTypeDefinition not supported) and is class.<br />
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.TypeExtensions.IsStructAndImplement(System.Type,System.Type)">
+            <summary>
+                Determine the type is implement the another type (interface or class,GenericTypeDefinition not supported) and is struct.<br />
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.TypeExtensions.IsSealedAndImplement(System.Type,System.Type)">
+            <summary>
+                Determine the type is implement the another type (interface or class,GenericTypeDefinition not supported) and is sealed.<br />
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.TypeExtensions.IsImplement(System.Type,System.Type)">
+            <summary>
+                Determine the type is implement the another type(interface or class,GenericTypeDefinition supported)
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.TypeExtensions.IsNumericType(System.Type)">
+            <summary>
+                Determine the type is int,double,long .. or other math type.
+                No nullable type.
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.TypeExtensions.IsNullableType(System.Type)">
+            <summary>
+                Determine the type is <see cref="T:System.Nullable`1" />
+            </summary>
+        </member>
+        <member name="M:BoysheO.Extensions.TypeExtensions.GetTypeCode(System.Type)">
+            <summary>
+            Get code string<br />
+            ex.typeof(List&lt;int&gt;) => "List&lt;int&gt;"
+            </summary>
+        </member>
+        <member name="T:BoysheO.Toolkit.PathValue">
+            <summary>
+            It means a file path or a directory path
+            </summary>
+        </member>
+        <member name="M:BoysheO.Toolkit.PathValue.Combine(BoysheO.Toolkit.PathValue)">
+            <summary>
+            Same as <see cref="M:System.IO.Path.Combine(System.String,System.String)"/>
+            ex. "a/b" + "c.txt" -> "a/b/c.txt"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Toolkit.PathValue.GetFileName">
+            <summary>
+            Same as <see cref="M:System.IO.Path.GetFileName(System.String)"/>
+            ex. "a/b/c.txt" -> "c.txt"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Toolkit.PathValue.GetDirectoryName">
+            <summary>
+            Same as <see cref="M:System.IO.Path.GetDirectoryName(System.String)"/>
+            ex. "a/b/c.txt" -> "a/b"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Toolkit.PathValue.GetFileNameWithoutExt">
+            <summary>
+            Same as <see cref="M:System.IO.Path.GetFileNameWithoutExtension(System.String)"/>
+            ex. "a.txt" -> "a"
+            </summary>
+        </member>
+        <member name="M:BoysheO.Toolkit.PathValue.GetExtension">
+            <summary>
+            Same as <see cref="M:System.IO.Path.GetExtension(System.String)"/>
+            ex. "a.txt" -> ".txt"
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BoysheO.Toolkit.PathValue.ChangeExtension(System.String,System.String)">
+            <summary>
+            Same as <see cref="M:System.IO.Path.ChangeExtension(System.String,System.String)"/>
+            ex. a.txt -> a.bytes
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.ByteUtil.HexCharToByte(System.Char)">
+            <summary>
+                将单个0-9A-Fa-f字符视作Hex转byte
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:BoysheO.Util.ByteUtil.HexCharToByte(System.Char,System.Char)">
+            <summary>
+                将形如"01""AF"这样的Hex字符对，转换成等义byte
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.ByteUtil.ByteToHexChar(System.Byte,System.Span{System.Char})">
+            <summary>
+            Convert the byte as '0A','3F'...<br />
+            buff's index 0 is the high digit.<br />
+            Buff must be 2 len
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.ByteUtil.ByteToBinDigits(System.Byte,System.Span{System.Boolean})">
+            <summary>
+            Convert the byte to bin numbers.ex.0A=>1010 (numbers' index 0 is 1) <br />
+            true is 1,false is 0
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.ByteUtil.IsGZipHeader(System.ReadOnlySpan{System.Byte})">
+            <summary>
+                判断前2个字节是否符合gzip标准1f8b<br />
+                Get to know is the bytes start with 1f8b GZip header
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.ByteUtil.IsGZipHeader(System.Span{System.Byte})">
+            <summary>
+                判断前2个字节是否符合gzip标准1f8b<br />
+                Get to know is the bytes start with 1f8b GZip header
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.ByteUtil.IsGZipHeader(System.Byte[])">
+            <summary>
+                判断前2个字节是否符合gzip标准1f8b<br />
+                Get to know is the bytes start with 1f8b GZip header
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.ByteUtil.IsGZipHeader(System.Collections.Generic.IEnumerable{System.Byte})">
+            <summary>
+                判断前2个字节是否符合gzip标准1f8b<br />
+                Get to know is the bytes start with 1f8b GZip header
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.DebugUtil.GetCallerContext(System.String,System.String,System.Int32)">
+            <summary>
+                获取调用方信息
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.DebugUtil.GetCallerFile(System.String)">
+            <summary>
+                获取调用方信息
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.DebugUtil.GetCallerMemberName(System.String)">
+            <summary>
+                获取调用方信息
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.IntUtil.ToStringWithSign(System.Int32,System.String)">
+            <summary>
+            输出形如+1、-1，+0这类带符号的;其中0值的显示取决于zero参数<br />
+            </summary>
+            <param name="value"></param>
+            <param name="zero">当value为0时，输出这个值，它应为"0"、"+0"、"-0"、" 0"之一</param>
+            <returns></returns>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.ManhattanDistance(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+                计算两坐标曼哈顿距离
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Draw``1(System.ReadOnlySpan{``0})">
+            <summary>
+                等概率抽取1个元素
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Draw``1(System.Collections.Generic.IList{``0})">
+            <summary>
+                等概率抽取1个元素
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Draw``1(System.Collections.Generic.ICollection{System.ValueTuple{``0,System.UInt32}})">
+            <summary>
+                加权抽取1个元素
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Draw``1(System.ReadOnlySpan{System.ValueTuple{``0,System.UInt32}})">
+            <summary>
+                加权抽取1个元素
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Draw``1(``0[])">
+            <summary>
+                等概率抽取1个元素
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Draw``1(System.Span{``0})">
+            <summary>
+                等概率抽取1个元素
+                collection必须可数
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Draw``1(System.ValueTuple{``0,System.UInt32}[])">
+            <summary>
+                加权抽取1个元素
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Draw``1(System.Span{System.ValueTuple{``0,System.UInt32}})">
+            <summary>
+                加权抽取1个元素
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.DrawAsPooledArray(System.Int32,System.Int32)">
+            <summary>
+                等概率抽取n个元素（排列）<br/>
+                蓄水池算法<br/>
+                *最终输出结果的顺序既有可能是顺序的，也有可能是乱序的
+            </summary>
+            <param name="count">抽取多少个元素</param>
+            <param name="poolSize">奖池大小</param>
+            <returns>池化数组，用完记得归还<see cref="T:System.Buffers.ArrayPool`1"/></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">参数不正确</exception>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.DrawAsPooledArraySorted(System.Int32,System.Int32)">
+            <summary>
+                等概率抽取n个元素（排列）<br/>
+                蓄水池有序改良算法<br/>
+                最终结果保持增序排列<br />
+            </summary>
+            <param name="count">抽取多少个元素</param>
+            <param name="poolSize">奖池大小</param>
+            <returns>池化数组，用完记得归还<see cref="T:System.Buffers.ArrayPool`1"/></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">参数不正确</exception>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Permutation``1(System.ValueTuple{System.UInt32,``0}[],System.UInt32)">
+            <summary>
+                加权抽取n个元素（排列）(非树）
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Permutation``1(System.Collections.Generic.IList{System.ValueTuple{System.UInt32,``0}},System.UInt32)">
+            <summary>
+                加权抽取n个元素（排列）(非树）
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Combination``1(``0[],System.UInt32)">
+            <summary>
+                等概率抽取抽取n个元素（组合）
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Combination``1(System.Collections.Generic.IList{``0},System.UInt32)">
+            <summary>
+                等概率抽取抽取n个元素（组合）
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Combination``1(System.ValueTuple{System.UInt32,``0}[],System.UInt32)">
+            <summary>
+                加权抽取n个元素（组合）(非树）
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Combination``1(System.Collections.Generic.IList{System.ValueTuple{System.UInt32,``0}},System.UInt32)">
+            <summary>
+                加权抽取n个元素（组合）(非树）
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Combination(System.Int32,System.Int32)">
+            <summary>
+            从n中组合k个元素组合的组合数
+            只能算很小的值
+            很大的值考虑使用大数库
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Permutation(System.Int32,System.Int32)">
+            <summary>
+            计算P(n,k)，从n个里面抽取k个排列的排列数
+            只能算很小的值(n∈[1,12],k∈[1,n])
+            很大的值考虑使用大数库
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Factorial1(System.Int32)">
+            <summary>
+            提供基本款阶乘(只能计算1-12）
+            很大的值考虑使用大数库
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.MathLibrary.Factorial2(System.Int32)">
+            <summary>
+            提供基本款阶乘(只能计算1-20）
+            很大的值考虑使用大数库
+            </summary>
+        </member>
+        <member name="T:BoysheO.Util.RandomUtil">
+            <summary>
+                <see cref="T:System.Random" />的非线程安全的镜像API，便于切换
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.RefArrayPoolUtil.Resize``1(``0[]@,System.Int32,System.Int32,System.Buffers.ArrayPool{``0})">
+            <summary>
+            resize a buff from ArrayPool.Share with ArrayPool.Share
+            !after resize,buff.Length is more than the size given generally
+            !resize cause copy every time,so call it just need
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.RefArrayPoolUtil.Add``1(``0[]@,System.Int32@,``0,System.Buffers.ArrayPool{``0})">
+            <summary>
+            Add value to the buff from ArrayPool.Share
+            * resize automatically
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.RefArrayPoolUtil.AddRange``1(``0[]@,System.Int32@,System.Collections.Generic.IReadOnlyList{``0},System.Buffers.ArrayPool{``0})">
+            <summary>
+            Add values to the buff from ArrayPool.Share
+            * resize automatically
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.RefArrayPoolUtil.AddRange``1(``0[]@,System.Int32@,System.ReadOnlySpan{``0},System.Buffers.ArrayPool{``0})">
+            <summary>
+            Add values to the buff from ArrayPool.Share
+            * resize automatically
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.RefArrayPoolUtil.Insert``1(``0[]@,System.Int32@,``0,System.Int32,System.Buffers.ArrayPool{``0})">
+            <summary>
+            Insert value to the buff from ArrayPool.Share
+            * resize automatically
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.RefArrayPoolUtil.InsertRange``1(``0[]@,System.Int32@,System.ReadOnlySpan{``0},System.Int32,System.Buffers.ArrayPool{``0})">
+            <summary>
+            Insert value to the buff from ArrayPool.Share
+            * resize automatically
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.RefArrayPoolUtil.InsertRange``1(``0[]@,System.Int32@,System.Collections.Generic.IReadOnlyList{``0},System.Int32,System.Buffers.ArrayPool{``0})">
+            <summary>
+            Insert value to the buff from ArrayPool.Share
+            * resize automatically
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.StringUtil.BytesToReadableSize(System.Int64)">
+            <summary>
+            1023=>1023b 1024=>1k 1048576=>1m
+            </summary>
+        </member>
+        <member name="M:BoysheO.Util.UnsafeUtil.AsMemoryByteSpan``1(``0@)">
+            <summary>
+                Look through the value as bytes in memory.<br />
+                *<b>UNSAFE</b>:Changing the return value causes the parameter value changed.
+                If you change the string,the program maybe crash.The suggestion
+                is use this for debug only.And,I don't promise the return value
+                is same in different hardware environment.Only the base value
+                can be the parameters.<br />
+                将该值类型转换成内存中byte表示，无复制,仅限基础类型，否则会异常.
+                *不安全：修改返回的span数组会修改初始值.在不清楚自己在做什么的时候不要修改返回值
+            </summary>
+        </member>
+        <member name="M:DateAndTime.TimeUtil.GetCountOfTheTimeBetween(System.Int64,System.Int64,System.Int32,System.Int32)">
+            <summary>
+            计算一个每日时刻在一段时间中的出现次数<br />
+            *起始时刻与timeMsOfDay重叠时算入出现次数，终止时刻与timeMsOfDay重叠时不算入出现次数<br />
+            calculate the count of the time of day between start to end <br />
+            *Result increase while starMs same as timeMsOfDay but endMs do not<br />
+            </summary>
+            <param name="startMs">
+            起始时间戳，需要保证起点为0点<br/>
+            Start timestamp.The standards it used must start from 0am</param>
+            <param name="endMs">
+            终止时间戳，需要保证0时刻与startMs语义一致<br />
+            End timestamp.The standards it used should be same as startMs. <br />
+            </param>
+            <param name="timeMsOfDay">
+            每日时刻<br />
+            Time in day<br />
+            </param>
+            <param name="timeOffset">
+            时区，指明timeMsOfDay所表达的时区。毫秒<br />
+            Timezone's timeoffset.Millsec.<br/>
+            </param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

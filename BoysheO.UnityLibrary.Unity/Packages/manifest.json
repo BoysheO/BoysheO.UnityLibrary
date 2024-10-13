@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.boysheo.extensions": "https://github.com/BoysheO/BoysheO.ExtensionsUPMVersion.git#v5.0.6",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.5",
     "com.unity.collab-proxy": "2.4.4",
     "com.unity.feature.2d": "2.0.0",

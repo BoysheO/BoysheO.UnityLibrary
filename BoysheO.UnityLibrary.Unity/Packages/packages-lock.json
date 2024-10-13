@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.boysheo.extensions": {
-      "version": "https://github.com/BoysheO/BoysheO.ExtensionsUPMVersion.git#v5.0.6",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "e1e1ca29573a02d9e8b95236abd969493662cc87"
-    },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.5",
       "depth": 0,

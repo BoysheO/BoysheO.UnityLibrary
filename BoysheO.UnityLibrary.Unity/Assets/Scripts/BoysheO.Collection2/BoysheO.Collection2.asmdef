@@ -3,7 +3,6 @@
   "references": [
     "BoysheO.Collection",
     "BoysheO.ObjectPool",
-    "BoysheO.Collection.Abstractions",
-    "UnityEngine.UI"
+    "BoysheO.Collection.Abstractions"
   ]
 }
