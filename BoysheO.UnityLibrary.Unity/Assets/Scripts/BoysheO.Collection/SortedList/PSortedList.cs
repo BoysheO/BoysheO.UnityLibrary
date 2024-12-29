@@ -263,7 +263,7 @@ namespace BoysheO.Collection
         // Returns a collection representing the keys of this sorted list. This
         // method returns the same object as GetKeyList, but typed as an
         // ICollection instead of an IList.
-        public IList<TKey> Keys
+        public IReadOnlyList<TKey> Keys
         {
             get
             {
@@ -941,7 +941,7 @@ namespace BoysheO.Collection
         [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
         [Serializable]
-        public sealed class KeyList : IList<TKey>, ICollection
+        public sealed class KeyList : IList<TKey>, ICollection,IReadOnlyList<TKey>
         {
             private readonly PSortedList<TKey, TValue> _dict; // Do not rename (binary serialization)
 

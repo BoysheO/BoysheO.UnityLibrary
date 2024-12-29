@@ -214,7 +214,7 @@ namespace BoysheO.Collection2
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            _data.Keys.CopyTo(array, arrayIndex);
+            _data.InternalKey.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(T item)

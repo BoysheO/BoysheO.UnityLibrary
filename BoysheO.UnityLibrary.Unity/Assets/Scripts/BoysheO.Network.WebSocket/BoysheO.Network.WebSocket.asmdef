@@ -1,0 +1,17 @@
+{
+    "name": "BoysheO.WebSocket",
+    "rootNamespace": "",
+    "references": [
+        "BoysheO.Collection",
+        "BoysheO.Collection2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
