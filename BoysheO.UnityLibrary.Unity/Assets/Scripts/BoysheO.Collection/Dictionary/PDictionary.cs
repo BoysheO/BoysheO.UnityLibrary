@@ -485,11 +485,14 @@ namespace BoysheO.Collection
 
         private bool TryInsert(TKey key, TValue value, InsertionBehavior behavior)
         {
-            if ((object) key == null)
+            if (key == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             ++this._version;
-            if (this._buckets == null)
-                this.Initialize(0);
+            //如果这个类被Dispose过，则_bucket.Length会为0，要重新填充一定空白数据
+            if (this._buckets == null || _buckets.Length == 0)
+            {
+                Initialize(0);
+            }
             var entries = this._entries.Span;
             IEqualityComparer<TKey> comparer = this._comparer;
             // int num1 = ((typeof(TKey).IsValueType && comparer == null)
