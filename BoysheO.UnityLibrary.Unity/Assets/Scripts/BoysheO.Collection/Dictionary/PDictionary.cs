@@ -398,34 +398,50 @@ namespace BoysheO.Collection
             if ((object) key == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
             int entry = -1;
-            var buckets = this._buckets.ReadOnlySpan;
-            var entries = this._entries.ReadOnlySpan;
-            int num1 = 0;
-            if (buckets != null)
+            if (_buckets != null)
             {
-                IEqualityComparer<TKey> comparer = this._comparer;
-                if (comparer == null)
+                var buckets = this._buckets.ReadOnlySpan;
+                var entries = this._entries.ReadOnlySpan;
+                int num1 = 0;
+                if (buckets != null)
                 {
-                    int num2 = key.GetHashCode() & int.MaxValue;
-                    entry = buckets[num2 % buckets.Length] - 1;
-                    if ((object) default(TKey) != null)
+                    IEqualityComparer<TKey> comparer = this._comparer;
+                    if (comparer == null)
                     {
-                        while ((uint) entry < (uint) entries.Length && (entries[entry].hashCode != num2 ||
-                                                                        !EqualityComparer<TKey>.Default.Equals(
-                                                                            entries[entry].key, key)))
+                        int num2 = key.GetHashCode() & int.MaxValue;
+                        entry = buckets[num2 % buckets.Length] - 1;
+                        if ((object) default(TKey) != null)
                         {
-                            entry = entries[entry].next;
-                            if (num1 >= entries.Length)
-                                ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
-                            ++num1;
+                            while ((uint) entry < (uint) entries.Length && (entries[entry].hashCode != num2 ||
+                                                                            !EqualityComparer<TKey>.Default.Equals(
+                                                                                entries[entry].key, key)))
+                            {
+                                entry = entries[entry].next;
+                                if (num1 >= entries.Length)
+                                    ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
+                                ++num1;
+                            }
+                        }
+                        else
+                        {
+                            EqualityComparer<TKey> equalityComparer = EqualityComparer<TKey>.Default;
+                            while ((uint) entry < (uint) entries.Length && (entries[entry].hashCode != num2 ||
+                                                                            !equalityComparer.Equals(entries[entry].key,
+                                                                                key)))
+                            {
+                                entry = entries[entry].next;
+                                if (num1 >= entries.Length)
+                                    ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
+                                ++num1;
+                            }
                         }
                     }
                     else
                     {
-                        EqualityComparer<TKey> equalityComparer = EqualityComparer<TKey>.Default;
-                        while ((uint) entry < (uint) entries.Length && (entries[entry].hashCode != num2 ||
-                                                                        !equalityComparer.Equals(entries[entry].key,
-                                                                            key)))
+                        int num3 = comparer.GetHashCode(key) & int.MaxValue;
+                        entry = buckets[num3 % buckets.Length] - 1;
+                        while ((uint) entry < (uint) entries.Length &&
+                               (entries[entry].hashCode != num3 || !comparer.Equals(entries[entry].key, key)))
                         {
                             entry = entries[entry].next;
                             if (num1 >= entries.Length)
@@ -434,21 +450,7 @@ namespace BoysheO.Collection
                         }
                     }
                 }
-                else
-                {
-                    int num3 = comparer.GetHashCode(key) & int.MaxValue;
-                    entry = buckets[num3 % buckets.Length] - 1;
-                    while ((uint) entry < (uint) entries.Length &&
-                           (entries[entry].hashCode != num3 || !comparer.Equals(entries[entry].key, key)))
-                    {
-                        entry = entries[entry].next;
-                        if (num1 >= entries.Length)
-                            ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
-                        ++num1;
-                    }
-                }
             }
-
             return entry;
         }
 
