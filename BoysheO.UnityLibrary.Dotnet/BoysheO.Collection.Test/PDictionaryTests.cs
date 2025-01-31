@@ -6,7 +6,7 @@ namespace BoysheO.Collection.Test;
 
 public class PDictionaryTests
 {
-    //在0.0.3版本及以前，dictionary调用Dispose之后，内部bucket长度变为0，导致Insert时取模为0抛异常
+    //在0.0.4版本及以前，dictionary调用Dispose之后，内部bucket长度变为0，导致Insert时取模为0抛异常
     [TestCase]
     public void EmptyAdd()
     {
