@@ -17,7 +17,7 @@ namespace BoysheO.Collection
         
         public bool TryAdd(TKey key, TValue value)
         {
-            var idx = keys.BinarySearch(key);
+            var idx = keys.BinarySearch(key,Comparer);
             if (idx >= 0) return false;
             Insert(~idx,key,value);
             return true;
