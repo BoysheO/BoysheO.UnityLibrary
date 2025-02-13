@@ -23,6 +23,8 @@ namespace BoysheO.Collection
         /// </summary>
         public ReadOnlySpan<T> ReadOnlySpan => _items.AsSpan(0, _size);
 
+        public T[] GetInternalArray() => _items;
+
         //公开Version属性，便于外部判断列表是否发生了变动
         public int Version => _version;
 
