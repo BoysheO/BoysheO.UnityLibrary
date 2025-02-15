@@ -46,6 +46,14 @@ namespace BoysheO.Collection
     // has a constructor that allows a specific IComparer implementation to
     // be specified.
     //
+    /// <summary>
+    /// *特别注意，如果传入的Compare不能保证正确性(指根据compare降序排序后的列表，任意表中元素比它的前面的元素大，比它后面的元素小，如不满足此条件，则一定会出bug)，
+    /// 则二分查找算法失效，此类将不能正常使用。
+    /// *Notice This type can not work with incorrect comparer.There is no exception throw.
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
+    [Obsolete("Notice This type can not work with incorrect comparer.There is no exception throw.")]
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
     public partial class PSortedList<TKey, TValue> :
