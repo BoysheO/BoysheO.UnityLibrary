@@ -18,11 +18,14 @@ namespace BoysheO.Collection
         // Empirically, 16 seems to speed up most cases without slowing down others, at least for integers.
         // Large value types may benefit from a smaller number.
         internal const int IntrosortSizeThreshold = 16;
-        
+
         #region IArraySortHelper<T> Members
 
-        public static void Sort<T>(this Span<T> keys, IComparer<T>? comparer)
+        public static void Sort<T>(Span<T> keys, IComparer<T>? comparer)
         {
+#if NET6_0_OR_GREATER
+            MemoryExtensions.Sort(keys, comparer);
+#else
             // Add a try block here to detect IComparers (or their
             // underlying IComparables, etc) that are bogus.
             try
@@ -38,12 +41,16 @@ namespace BoysheO.Collection
             {
                 ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
             }
+#endif
         }
 
         #endregion
 
-        public static void Sort<T>(this Span<T> keys, Comparison<T> comparer)
+        public static void Sort<T>(Span<T> keys, Comparison<T> comparer)
         {
+#if NET6_0_OR_GREATER
+            MemoryExtensions.Sort(keys, comparer);
+#else
             Debug.Assert(comparer != null, "Check the arguments in the caller!");
 
             // Add a try block here to detect bogus comparisons
@@ -59,6 +66,7 @@ namespace BoysheO.Collection
             {
                 ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
             }
+#endif
         }
 
         private static void SwapIfGreater<T>(Span<T> keys, Comparison<T> comparer, int i, int j)
@@ -83,20 +91,20 @@ namespace BoysheO.Collection
             a[j] = t;
         }
 
-        public static void IntrospectiveSort<T>(this Span<T> keys, Comparison<T> comparer)
+        public static void IntrospectiveSort<T>(Span<T> keys, Comparison<T> comparer)
         {
             Debug.Assert(comparer != null);
 
             if (keys.Length > 1)
             {
-                IntroSort(keys, 2 * (BitOperations.Log2((uint) keys.Length) + 1), comparer);
+                IntroSort(keys, 2 * (BitOperations.Log2((uint)keys.Length) + 1), comparer);
             }
         }
 
         // IntroSort is recursive; block it from being inlined into itself as
         // this is currenly not profitable.
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void IntroSort<T>(this Span<T> keys, int depthLimit, Comparison<T> comparer)
+        private static void IntroSort<T>(Span<T> keys, int depthLimit, Comparison<T> comparer)
         {
             Debug.Assert(!keys.IsEmpty);
             Debug.Assert(depthLimit >= 0);
@@ -182,7 +190,7 @@ namespace BoysheO.Collection
             return left;
         }
 
-        public static void HeapSort<T>(this Span<T> keys, Comparison<T> comparer)
+        public static void HeapSort<T>(Span<T> keys, Comparison<T> comparer)
         {
             Debug.Assert(comparer != null);
             Debug.Assert(!keys.IsEmpty);
@@ -246,6 +254,9 @@ namespace BoysheO.Collection
 
         public static void Sort<TKey, TValue>(Span<TKey> keys, Span<TValue> values, IComparer<TKey>? comparer)
         {
+#if NET6_0_OR_GREATER
+            MemoryExtensions.Sort(keys, values, comparer);
+#else
             // Add a try block here to detect IComparers (or their
             // underlying IComparables, etc) that are bogus.
             try
@@ -260,6 +271,7 @@ namespace BoysheO.Collection
             {
                 ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_IComparerFailed, e);
             }
+#endif
         }
 
         private static void SwapIfGreaterWithValues<TKey, TValue>(Span<TKey> keys, Span<TValue> values,
@@ -305,7 +317,7 @@ namespace BoysheO.Collection
 
             if (keys.Length > 1)
             {
-                IntroSort(keys, values, 2 * (BitOperations.Log2((uint) keys.Length) + 1), comparer);
+                IntroSort(keys, values, 2 * (BitOperations.Log2((uint)keys.Length) + 1), comparer);
             }
         }
 
@@ -320,7 +332,7 @@ namespace BoysheO.Collection
             int partitionSize = keys.Length;
             while (partitionSize > 1)
             {
-                if (partitionSize <=IntrosortSizeThreshold)
+                if (partitionSize <= IntrosortSizeThreshold)
                 {
                     if (partitionSize == 2)
                     {
@@ -359,7 +371,7 @@ namespace BoysheO.Collection
         private static int PickPivotAndPartition<TKey, TValue>(Span<TKey> keys, Span<TValue> values,
             IComparer<TKey> comparer)
         {
-            Debug.Assert(keys.Length >=IntrosortSizeThreshold);
+            Debug.Assert(keys.Length >= IntrosortSizeThreshold);
             Debug.Assert(comparer != null);
 
             int hi = keys.Length - 1;

@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace BoysheO.Collection
 {
+    #if !NET6_0_OR_GREATER
     /// <summary>
     /// Utility methods for intrinsic bit-twiddling operations.
     /// The methods use hardware intrinsics when available on the underlying platform,
@@ -66,4 +67,5 @@ namespace BoysheO.Collection
                 (IntPtr) (int) ((value * 0x07C4ACDDu) >> 27));
         }
     }
+    #endif
 }
