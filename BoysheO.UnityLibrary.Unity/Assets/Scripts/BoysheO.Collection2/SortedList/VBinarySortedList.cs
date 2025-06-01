@@ -7,13 +7,16 @@ namespace BoysheO.Collection2
 {
     /// <summary>
     /// don't use again after disposable
+    /// *特别注意，如果传入的Compare不能保证正确性(指根据compare降序排序后的列表，任意表中元素比它的前面的元素大，比它后面的元素小，如不满足此条件，则一定会出bug)，
+    /// 则二分查找算法失效，此类将不能正常使用。
+    /// *Notice This type can not work with incorrect comparer.There is no exception throw.
     /// </summary>
-    public readonly struct VSortedList<TK, TV> : IDisposable where TK : notnull
+    public readonly struct VBinarySortedList<TK, TV> : IDisposable where TK : notnull
     {
         internal readonly long _order;
-        internal readonly PSortedList<TK, TV> _buffer;
+        internal readonly PBinarySortedList<TK, TV> _buffer;
 
-        public PSortedList<TK, TV> InternalBuffer
+        public PBinarySortedList<TK, TV> InternalBuffer
         {
             get
             {
@@ -27,7 +30,7 @@ namespace BoysheO.Collection2
             get
             {
                 return _order != 0 && _buffer != null &&
-                       StrongOrderedPool<PSortedList<TK, TV>>.Share.GetOrder(_buffer) == _order;
+                       StrongOrderedPool<PBinarySortedList<TK, TV>>.Share.GetOrder(_buffer) == _order;
             }
         }
 
@@ -36,7 +39,7 @@ namespace BoysheO.Collection2
             get { return _buffer.Count; }
         }
 
-        private VSortedList(long order, PSortedList<TK, TV> buffer)
+        private VBinarySortedList(long order, PBinarySortedList<TK, TV> buffer)
         {
             _order = order;
             _buffer = buffer;
@@ -48,15 +51,15 @@ namespace BoysheO.Collection2
             {
                 _buffer.Reset(null);
                 _buffer.Dispose();
-                StrongOrderedPool<PSortedList<TK, TV>>.Share.Return(_buffer);
+                StrongOrderedPool<PBinarySortedList<TK, TV>>.Share.Return(_buffer);
             }
         }
 
-        public static VSortedList<TK, TV> Rent(IComparer<TK>? comparer = null)
+        public static VBinarySortedList<TK, TV> Rent(IComparer<TK>? comparer = null)
         {
-            var ins = StrongOrderedPool<PSortedList<TK, TV>>.Share.Rent(out var order);
+            var ins = StrongOrderedPool<PBinarySortedList<TK, TV>>.Share.Rent(out var order);
             ins.Reset(comparer);
-            return new VSortedList<TK, TV>(order, ins);
+            return new VBinarySortedList<TK, TV>(order, ins);
         }
 
         private void ThrowIfExpired()
@@ -64,7 +67,7 @@ namespace BoysheO.Collection2
             if (_buffer == null || _order == 0)
                 throw new ObjectDisposedException("",
                     $"you must get this buffer using static method {nameof(VDictionary<TK, TV>)}.{nameof(Rent)}()");
-            if (_order != StrongOrderedPool<PSortedList<TK, TV>>.Share.GetOrder(_buffer))
+            if (_order != StrongOrderedPool<PBinarySortedList<TK, TV>>.Share.GetOrder(_buffer))
                 throw new ObjectDisposedException("this buffer is disposed");
         }
     }

@@ -21,7 +21,7 @@ namespace BoysheO.TinyStateMachine
         public List<Action<StateMachine<TState, TEvent, TContext>, TState>> onExit { get; init; }
 
 #else
-        public VSortedList<TEvent, VList<EventProcessor<TState, TEvent, TContext>>> EventId2Processors { get; init; }
+        public VBinarySortedList<TEvent, VList<EventProcessor<TState, TEvent, TContext>>> EventId2Processors { get; init; }
         public VList<Action<StateMachine<TState, TEvent, TContext>, TState>> onEnter { get; init; }
         public VList<Action<StateMachine<TState, TEvent, TContext>, TState>> onExit { get; init; }
 #endif

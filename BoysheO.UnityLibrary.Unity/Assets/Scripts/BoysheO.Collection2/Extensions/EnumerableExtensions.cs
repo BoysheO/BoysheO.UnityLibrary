@@ -85,13 +85,13 @@ namespace BoysheO.Collection2.Linq
             return buff;
         }
 
-        public static VSortedList<TK, TV> ToVSortedList<TS, TK, TV>(
+        public static VBinarySortedList<TK, TV> ToVSortedList<TS, TK, TV>(
             this IEnumerable<TS> source,
             Func<TS, TK> keySelector,
             Func<TS, TV> valueSelector,
             IComparer<TK>? comparer) where TK : notnull
         {
-            var buff = VSortedList<TK, TV>.Rent(comparer);
+            var buff = VBinarySortedList<TK, TV>.Rent(comparer);
             var interBuff = buff.InternalBuffer;
             foreach (var x1 in source)
             {

@@ -53,10 +53,9 @@ namespace BoysheO.Collection
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    [Obsolete("Notice This type can not work with incorrect comparer.There is no exception throw.")]
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
-    public partial class PSortedList<TKey, TValue> :
+    public partial class PBinarySortedList<TKey, TValue> :
         IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue> where TKey : notnull
     {
         private readonly PList<TKey> keys; // Do not rename (binary serialization)
@@ -74,7 +73,7 @@ namespace BoysheO.Collection
         // required. The elements of the sorted list are ordered according to the
         // IComparable interface, which must be implemented by the keys of
         // all entries added to the sorted list.
-        public PSortedList()
+        public PBinarySortedList()
         {
             keys = new PList<TKey>();
             values = new PList<TValue>();
@@ -88,7 +87,7 @@ namespace BoysheO.Collection
         // IComparable interface, which must be implemented by the keys of
         // all entries added to the sorted list.
         //
-        public PSortedList(int capacity)
+        public PBinarySortedList(int capacity)
         {
             if (capacity < 0) ThrowHelper.ThrowArgumentOutOfRangeException_NeedNonNegNum(nameof(capacity));
             keys = new PList<TKey>(capacity);
@@ -106,7 +105,7 @@ namespace BoysheO.Collection
         // interface, which in that case must be implemented by the keys of all
         // entries added to the sorted list.
         //
-        public PSortedList(IComparer<TKey>? comparer)
+        public PBinarySortedList(IComparer<TKey>? comparer)
             : this()
         {
             if (comparer != null)
@@ -124,7 +123,7 @@ namespace BoysheO.Collection
         // the IComparable interface, which in that case must be implemented
         // by the keys of all entries added to the sorted list.
         //
-        public PSortedList(int capacity, IComparer<TKey>? comparer)
+        public PBinarySortedList(int capacity, IComparer<TKey>? comparer)
             : this(comparer)
         {
             Capacity = capacity;
@@ -485,7 +484,7 @@ namespace BoysheO.Collection
         /// <summary>
         /// Gets the value corresponding to the specified index.
         /// </summary>
-        /// <param name="index">The zero-based index of the value within the entire <see cref="PSortedList{TKey,TValue}"/>.</param>
+        /// <param name="index">The zero-based index of the value within the entire <see cref="PBinarySortedList{TKey,TValue}"/>.</param>
         /// <returns>The value corresponding to the specified index.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The specified index was out of range.</exception>
         public TValue GetValueAtIndex(int index)
@@ -498,7 +497,7 @@ namespace BoysheO.Collection
         /// <summary>
         /// Updates the value corresponding to the specified index.
         /// </summary>
-        /// <param name="index">The zero-based index of the value within the entire <see cref="PSortedList{TKey,TValue}"/>.</param>
+        /// <param name="index">The zero-based index of the value within the entire <see cref="PBinarySortedList{TKey,TValue}"/>.</param>
         /// <param name="value">The value with which to replace the entry at the specified index.</param>
         /// <exception cref="ArgumentOutOfRangeException">The specified index was out of range.</exception>
         public void SetValueAtIndex(int index, TValue value)
@@ -523,7 +522,7 @@ namespace BoysheO.Collection
         /// <summary>
         /// Gets the key corresponding to the specified index.
         /// </summary>
-        /// <param name="index">The zero-based index of the key within the entire <see cref="PSortedList{TKey,TValue}"/>.</param>
+        /// <param name="index">The zero-based index of the key within the entire <see cref="PBinarySortedList{TKey,TValue}"/>.</param>
         /// <returns>The key corresponding to the specified index.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The specified index is out of range.</exception>
         public TKey GetKeyAtIndex(int index)
@@ -699,7 +698,7 @@ namespace BoysheO.Collection
 
         public struct Enumerator : IEnumerator<KeyValuePair<TKey, TValue>>, IDictionaryEnumerator
         {
-            private readonly PSortedList<TKey, TValue> _sortedList;
+            private readonly PBinarySortedList<TKey, TValue> _binarySortedList;
             private TKey? _key;
             private TValue? _value;
             private int _index;
@@ -709,11 +708,11 @@ namespace BoysheO.Collection
             internal const int KeyValuePair = 1;
             internal const int DictEntry = 2;
 
-            internal Enumerator(PSortedList<TKey, TValue> sortedList, int getEnumeratorRetType)
+            internal Enumerator(PBinarySortedList<TKey, TValue> binarySortedList, int getEnumeratorRetType)
             {
-                _sortedList = sortedList;
+                _binarySortedList = binarySortedList;
                 _index = 0;
-                _version = _sortedList.keys.Version;
+                _version = _binarySortedList.keys.Version;
                 _getEnumeratorRetType = getEnumeratorRetType;
                 _key = default;
                 _value = default;
@@ -730,7 +729,7 @@ namespace BoysheO.Collection
             {
                 get
                 {
-                    if (_index == 0 || (_index == _sortedList.Count + 1))
+                    if (_index == 0 || (_index == _binarySortedList.Count + 1))
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
                     }
@@ -741,17 +740,17 @@ namespace BoysheO.Collection
 
             public bool MoveNext()
             {
-                if (_version != _sortedList.keys.Version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
+                if (_version != _binarySortedList.keys.Version) throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
 
-                if ((uint)_index < (uint)_sortedList.Count)
+                if ((uint)_index < (uint)_binarySortedList.Count)
                 {
-                    _key = _sortedList.keys[_index];
-                    _value = _sortedList.values[_index];
+                    _key = _binarySortedList.keys[_index];
+                    _value = _binarySortedList.values[_index];
                     _index++;
                     return true;
                 }
 
-                _index = _sortedList.Count + 1;
+                _index = _binarySortedList.Count + 1;
                 _key = default;
                 _value = default;
                 return false;
@@ -761,7 +760,7 @@ namespace BoysheO.Collection
             {
                 get
                 {
-                    if (_index == 0 || (_index == _sortedList.Count + 1))
+                    if (_index == 0 || (_index == _binarySortedList.Count + 1))
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
                     }
@@ -776,7 +775,7 @@ namespace BoysheO.Collection
             {
                 get
                 {
-                    if (_index == 0 || (_index == _sortedList.Count + 1))
+                    if (_index == 0 || (_index == _binarySortedList.Count + 1))
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
                     }
@@ -796,7 +795,7 @@ namespace BoysheO.Collection
             {
                 get
                 {
-                    if (_index == 0 || (_index == _sortedList.Count + 1))
+                    if (_index == 0 || (_index == _binarySortedList.Count + 1))
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
                     }
@@ -807,7 +806,7 @@ namespace BoysheO.Collection
 
             void IEnumerator.Reset()
             {
-                if (_version != _sortedList.keys.Version)
+                if (_version != _binarySortedList.keys.Version)
                 {
                     throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 }
@@ -820,15 +819,15 @@ namespace BoysheO.Collection
 
         private sealed class SortedListKeyEnumerator : IEnumerator<TKey>, IEnumerator
         {
-            private readonly PSortedList<TKey, TValue> _sortedList;
+            private readonly PBinarySortedList<TKey, TValue> _binarySortedList;
             private int _index;
             private readonly int _version;
             private TKey? _currentKey;
 
-            internal SortedListKeyEnumerator(PSortedList<TKey, TValue> sortedList)
+            internal SortedListKeyEnumerator(PBinarySortedList<TKey, TValue> binarySortedList)
             {
-                _sortedList = sortedList;
-                _version = sortedList.keys.Version;
+                _binarySortedList = binarySortedList;
+                _version = binarySortedList.keys.Version;
             }
 
             public void Dispose()
@@ -839,19 +838,19 @@ namespace BoysheO.Collection
 
             public bool MoveNext()
             {
-                if (_version != _sortedList.keys.Version)
+                if (_version != _binarySortedList.keys.Version)
                 {
                     throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 }
 
-                if ((uint)_index < (uint)_sortedList.Count)
+                if ((uint)_index < (uint)_binarySortedList.Count)
                 {
-                    _currentKey = _sortedList.keys[_index];
+                    _currentKey = _binarySortedList.keys[_index];
                     _index++;
                     return true;
                 }
 
-                _index = _sortedList.Count + 1;
+                _index = _binarySortedList.Count + 1;
                 _currentKey = default;
                 return false;
             }
@@ -862,7 +861,7 @@ namespace BoysheO.Collection
             {
                 get
                 {
-                    if (_index == 0 || (_index == _sortedList.Count + 1))
+                    if (_index == 0 || (_index == _binarySortedList.Count + 1))
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
                     }
@@ -873,7 +872,7 @@ namespace BoysheO.Collection
 
             void IEnumerator.Reset()
             {
-                if (_version != _sortedList.keys.Version)
+                if (_version != _binarySortedList.keys.Version)
                 {
                     throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 }
@@ -884,15 +883,15 @@ namespace BoysheO.Collection
 
         private sealed class SortedListValueEnumerator : IEnumerator<TValue>, IEnumerator
         {
-            private readonly PSortedList<TKey, TValue> _sortedList;
+            private readonly PBinarySortedList<TKey, TValue> _binarySortedList;
             private int _index;
             private readonly int _version;
             private TValue? _currentValue;
 
-            internal SortedListValueEnumerator(PSortedList<TKey, TValue> sortedList)
+            internal SortedListValueEnumerator(PBinarySortedList<TKey, TValue> binarySortedList)
             {
-                _sortedList = sortedList;
-                _version = sortedList.keys.Version;
+                _binarySortedList = binarySortedList;
+                _version = binarySortedList.keys.Version;
             }
 
             public void Dispose()
@@ -903,19 +902,19 @@ namespace BoysheO.Collection
 
             public bool MoveNext()
             {
-                if (_version != _sortedList.keys.Version)
+                if (_version != _binarySortedList.keys.Version)
                 {
                     throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 }
 
-                if ((uint)_index < (uint)_sortedList.Count)
+                if ((uint)_index < (uint)_binarySortedList.Count)
                 {
-                    _currentValue = _sortedList.values[_index];
+                    _currentValue = _binarySortedList.values[_index];
                     _index++;
                     return true;
                 }
 
-                _index = _sortedList.Count + 1;
+                _index = _binarySortedList.Count + 1;
                 _currentValue = default;
                 return false;
             }
@@ -926,7 +925,7 @@ namespace BoysheO.Collection
             {
                 get
                 {
-                    if (_index == 0 || (_index == _sortedList.Count + 1))
+                    if (_index == 0 || (_index == _binarySortedList.Count + 1))
                     {
                         throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
                     }
@@ -937,7 +936,7 @@ namespace BoysheO.Collection
 
             void IEnumerator.Reset()
             {
-                if (_version != _sortedList.keys.Version)
+                if (_version != _binarySortedList.keys.Version)
                 {
                     throw new InvalidOperationException(SR.InvalidOperation_EnumFailedVersion);
                 }
@@ -951,9 +950,9 @@ namespace BoysheO.Collection
         [Serializable]
         public sealed class KeyList : IList<TKey>, ICollection,IReadOnlyList<TKey>
         {
-            private readonly PSortedList<TKey, TValue> _dict; // Do not rename (binary serialization)
+            private readonly PBinarySortedList<TKey, TValue> _dict; // Do not rename (binary serialization)
 
-            internal KeyList(PSortedList<TKey, TValue> dictionary)
+            internal KeyList(PBinarySortedList<TKey, TValue> dictionary)
             {
                 _dict = dictionary;
             }
@@ -1071,9 +1070,9 @@ namespace BoysheO.Collection
         [Serializable]
         public sealed class ValueList : IList<TValue>, ICollection
         {
-            private readonly PSortedList<TKey, TValue> _dict; // Do not rename (binary serialization)
+            private readonly PBinarySortedList<TKey, TValue> _dict; // Do not rename (binary serialization)
 
-            internal ValueList(PSortedList<TKey, TValue> dictionary)
+            internal ValueList(PBinarySortedList<TKey, TValue> dictionary)
             {
                 _dict = dictionary;
             }

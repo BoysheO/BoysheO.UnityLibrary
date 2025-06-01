@@ -19,7 +19,7 @@ namespace BoysheO.TinyStateMachine
         private SortedList<TState, State<TState, TTrigger, TContext>> id2state { get; init; }
         private StrongBox<bool> _isAlive { get; init; }
 #else
-        private VSortedList<TState, State<TState, TTrigger, TContext>> id2state { get; init; }
+        private VBinarySortedList<TState, State<TState, TTrigger, TContext>> id2state { get; init; }
 #endif
 
         public static StateMachineBuilder<TState, TTrigger, TContext> Creat()
@@ -30,7 +30,7 @@ namespace BoysheO.TinyStateMachine
                 id2state = new SortedList<TState, State<TState, TTrigger, TContext>>(),
                 _isAlive = new StrongBox<bool>(true),
 #else
-                id2state = VSortedList<TState, State<TState, TTrigger, TContext>>.Rent(),
+                id2state = VBinarySortedList<TState, State<TState, TTrigger, TContext>>.Rent(),
 #endif
             };
             
@@ -57,7 +57,7 @@ namespace BoysheO.TinyStateMachine
                 Id = id,
                 onEnter = VList<Action<StateMachine<TState, TTrigger, TContext>, TState>>.Rent(),
                 onExit = VList<Action<StateMachine<TState, TTrigger, TContext>, TState>>.Rent(),
-                EventId2Processors = VSortedList<TTrigger, VList<EventProcessor<TState, TTrigger, TContext>>>.Rent(),
+                EventId2Processors = VBinarySortedList<TTrigger, VList<EventProcessor<TState, TTrigger, TContext>>>.Rent(),
             };
             id2state.InternalBuffer[id] = state;
 #endif
@@ -76,7 +76,7 @@ namespace BoysheO.TinyStateMachine
             var newBuff = id2state;
             _isAlive.Value = false;
 #else
-            var newBuff = VSortedList<TState, State<TState, TTrigger, TContext>>.Rent();
+            var newBuff = VBinarySortedList<TState, State<TState, TTrigger, TContext>>.Rent();
             var inBuff = newBuff.InternalBuffer;
             inBuff.Capacity = id2state.InternalBuffer.Capacity;
             id2state.InternalBuffer.FastCopyTo(inBuff);

@@ -107,7 +107,7 @@ namespace BoysheO.Collection2.Linq
         }
 
         public static VList<KeyValuePair<TK, TV>> ToVList<TK, TV>(
-            this VSortedList<TK, TV> source) where TK : notnull
+            this VBinarySortedList<TK, TV> source) where TK : notnull
         {
             var buff = VList<KeyValuePair<TK, TV>>.Rent();
             var span = buff.InternalBuffer.AppendSpan(source.Count);
@@ -138,7 +138,7 @@ namespace BoysheO.Collection2.Linq
             return buff;
         }
 
-        public static VSortedList<TK, TV> ToVSortedList<TS, TK, TV>(
+        public static VBinarySortedList<TK, TV> ToVSortedList<TS, TK, TV>(
             this VList<TS> source,
             Func<TS, TK> keySelector,
             Func<TS, TV> valueSelector,
@@ -147,7 +147,7 @@ namespace BoysheO.Collection2.Linq
             if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
             if (valueSelector == null) throw new ArgumentNullException(nameof(valueSelector));
             if (keyComparer == null) throw new ArgumentNullException(nameof(keyComparer));
-            var buff = VSortedList<TK, TV>.Rent(keyComparer);
+            var buff = VBinarySortedList<TK, TV>.Rent(keyComparer);
             var ibuff = buff.InternalBuffer;
             foreach (var x1 in source.Span)
             {

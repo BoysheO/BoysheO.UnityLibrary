@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BoysheO.Collection
 {
-    partial class PSortedList<TKey, TValue>:IDisposable
+    partial class PBinarySortedList<TKey, TValue>:IDisposable
     {
         public PList<TKey> InternalKey => keys;
         public PList<TValue> InternalValues => values;
@@ -29,7 +29,7 @@ namespace BoysheO.Collection
             return t;
         }
 
-        public void FastCopyTo(PSortedList<TKey, TValue> another)
+        public void FastCopyTo(PBinarySortedList<TKey, TValue> another)
         {
             if (another.Capacity != this.Capacity) throw new Exception("should have same capacity");
             if (another.Count != 0) throw new Exception("another should be empty");

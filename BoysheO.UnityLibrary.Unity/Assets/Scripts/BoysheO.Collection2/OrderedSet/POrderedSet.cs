@@ -9,12 +9,12 @@ namespace BoysheO.Collection2
 {
     public class POrderedSet<T> : ISet<T>, IDisposable, IReadOnlyOrderedSet<T> where T : notnull
     {
-        private readonly PSortedList<T, ValueTuple> _data;
+        private readonly PBinarySortedList<T, ValueTuple> _data;
 
         /// <summary>
         /// 请即用即弃，对集合的操作可能会替换它的引用。（即使源码中没有这样做，也不保证以后源码不重构）
         /// </summary>
-        public PSortedList<T, ValueTuple> InternalData => _data;
+        public PBinarySortedList<T, ValueTuple> InternalData => _data;
 
 #if NETSTANDARD2_0
 #else
@@ -40,7 +40,7 @@ namespace BoysheO.Collection2
 
         public POrderedSet(IComparer<T>? comparer = null)
         {
-            _data = new PSortedList<T, ValueTuple>(comparer);
+            _data = new PBinarySortedList<T, ValueTuple>(comparer);
         }
 
         public PList<T>.Enumerator GetEnumerator()

@@ -21,7 +21,7 @@ namespace BoysheO.TinyStateMachine
 #if USE_SYSTEM_COLLECTION
         private readonly SortedList<TState, State<TState, TTrigger, TContext>> id2state;
 #else
-        private readonly VSortedList<TState, State<TState, TTrigger, TContext>> id2state;
+        private readonly VBinarySortedList<TState, State<TState, TTrigger, TContext>> id2state;
 #endif
         public TState State { get; private set; }
 
@@ -171,7 +171,7 @@ namespace BoysheO.TinyStateMachine
         internal StateMachine(SortedList<TState, State<TState, TTrigger, TContext>> id2State, TState firstState,
             TContext context)
 #else
-        internal StateMachine(VSortedList<TState, State<TState, TTrigger, TContext>> id2State, TState firstState,
+        internal StateMachine(VBinarySortedList<TState, State<TState, TTrigger, TContext>> id2State, TState firstState,
             TContext context)
 #endif
         {
