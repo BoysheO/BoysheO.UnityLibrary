@@ -7,7 +7,12 @@ using BoysheO.Collection;
 
 namespace BoysheO.Collection2
 {
-    public class POrderedSet<T> : ISet<T>, IDisposable, IReadOnlyOrderedSet<T> where T : notnull
+    /// <summary>
+    /// *特别注意，如果传入的Compare不能保证正确性(指根据compare降序排序后的列表，任意表中元素比它的前面的元素大，比它后面的元素小，如不满足此条件，则一定会出bug)，
+    /// 则二分查找算法失效，此类将不能正常使用。
+    /// *Notice This type can not work with incorrect comparer.There is no exception throw.
+    /// </summary>
+    public class PBinarySet<T> : ISet<T>, IDisposable, IReadOnlyOrderedSet<T> where T : notnull
     {
         private readonly PBinarySortedList<T, ValueTuple> _data;
 
@@ -34,11 +39,11 @@ namespace BoysheO.Collection2
             get { return this; }
         }
 
-        public POrderedSet() : this(null)
+        public PBinarySet() : this(null)
         {
         }
 
-        public POrderedSet(IComparer<T>? comparer = null)
+        public PBinarySet(IComparer<T>? comparer = null)
         {
             _data = new PBinarySortedList<T, ValueTuple>(comparer);
         }
@@ -108,7 +113,7 @@ namespace BoysheO.Collection2
 
         public void IntersectWith(IEnumerable<T> other)
         {
-            using var intersected = VOrderedSet<T>.Rent(_data.Comparer);
+            using var intersected = VBinarySet<T>.Rent(_data.Comparer);
             var buffer = intersected.InternalBuffer;
             foreach (var item in other)
             {
@@ -127,7 +132,7 @@ namespace BoysheO.Collection2
 
         public bool IsProperSubsetOf(IEnumerable<T> other)
         {
-            using var buffer = VOrderedSet<T>.Rent(_data.Comparer);
+            using var buffer = VBinarySet<T>.Rent(_data.Comparer);
             var otherSet = buffer.InternalBuffer;
             otherSet.UnionWith(other);
             return IsSubsetOf(otherSet) && Count < otherSet.Count;
@@ -140,7 +145,7 @@ namespace BoysheO.Collection2
 
         public bool IsSubsetOf(IEnumerable<T> other)
         {
-            using var buffer = VOrderedSet<T>.Rent(_data.Comparer);
+            using var buffer = VBinarySet<T>.Rent(_data.Comparer);
             var otherSet = buffer.InternalBuffer;
             otherSet.UnionWith(other);
             return this.All(otherSet.Contains);
@@ -158,7 +163,7 @@ namespace BoysheO.Collection2
 
         public bool SetEquals(IEnumerable<T> other)
         {
-            using var buffer = VOrderedSet<T>.Rent(_data.Comparer);
+            using var buffer = VBinarySet<T>.Rent(_data.Comparer);
             var otherSet = buffer.InternalBuffer;
             otherSet.UnionWith(other);
             return Count == otherSet.Count && this.All(otherSet.Contains);
@@ -166,7 +171,7 @@ namespace BoysheO.Collection2
 
         public void SymmetricExceptWith(IEnumerable<T> other)
         {
-            using var buffer = VOrderedSet<T>.Rent(_data.Comparer);
+            using var buffer = VBinarySet<T>.Rent(_data.Comparer);
             var otherSet = buffer.InternalBuffer;
             using var buffer2 = VList<T>.Rent();
             var toAdd = buffer2.InternalBuffer;

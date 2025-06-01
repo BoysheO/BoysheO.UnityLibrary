@@ -4,12 +4,12 @@ using BoysheO.ObjectPool;
 
 namespace BoysheO.Collection2
 {
-    public struct VOrderedSet<T>:IDisposable where T : notnull
+    public readonly struct VBinarySet<T>:IDisposable where T : notnull
     {
         private readonly long _order;
-        private readonly POrderedSet<T> _buffer;
+        private readonly PBinarySet<T> _buffer;
 
-        private VOrderedSet(long order, POrderedSet<T> buffer)
+        private VBinarySet(long order, PBinarySet<T> buffer)
         {
             _order = order;
             _buffer = buffer;
@@ -19,11 +19,11 @@ namespace BoysheO.Collection2
         {
             get
             {
-                return _order != 0 && _buffer != null && StrongOrderedPool<POrderedSet<T>>.Share.GetOrder(_buffer) == _order;
+                return _order != 0 && _buffer != null && StrongOrderedPool<PBinarySet<T>>.Share.GetOrder(_buffer) == _order;
             }
         }
 
-        public POrderedSet<T> InternalBuffer
+        public PBinarySet<T> InternalBuffer
         {
             get
             {
@@ -36,8 +36,8 @@ namespace BoysheO.Collection2
         {
             if (_buffer == null || _order == 0)
                 throw new ObjectDisposedException("",
-                    $"you must get this buffer using static method {nameof(VOrderedSet<T>)}.{nameof(Rent)}()");
-            if (_order != StrongOrderedPool<POrderedSet<T>>.Share.GetOrder(_buffer))
+                    $"you must get this buffer using static method {nameof(VBinarySet<T>)}.{nameof(Rent)}()");
+            if (_order != StrongOrderedPool<PBinarySet<T>>.Share.GetOrder(_buffer))
                 throw new ObjectDisposedException("this buffer is disposed");
         }
         
@@ -47,15 +47,15 @@ namespace BoysheO.Collection2
             {
                 _buffer.Reset(null);
                 _buffer.Dispose();
-                StrongOrderedPool<POrderedSet<T>>.Share.Return(_buffer);
+                StrongOrderedPool<PBinarySet<T>>.Share.Return(_buffer);
             }
         }
 
-        public static VOrderedSet<T> Rent(IComparer<T>? comparer = null)
+        public static VBinarySet<T> Rent(IComparer<T>? comparer = null)
         {
-            var ins = StrongOrderedPool<POrderedSet<T>>.Share.Rent(out var order);
+            var ins = StrongOrderedPool<PBinarySet<T>>.Share.Rent(out var order);
             ins.Reset(comparer);
-            return new VOrderedSet<T>(order, ins);
+            return new VBinarySet<T>(order, ins);
         }
     }
 }

@@ -101,29 +101,29 @@ namespace BoysheO.Collection2.Linq
             return buff;
         }
 
-        public static VOrderedSet<T> ToVOrderedSet<T>(this IEnumerable<T> itor,
+        public static VBinarySet<T> ToVBinarySet<T>(this IEnumerable<T> itor,
             IComparer<T>? comparer) where T : notnull
         {
             if (itor == null) throw new ArgumentNullException(nameof(itor));
             if (comparer == null) throw new ArgumentNullException(nameof(comparer));
-            var buffer = VOrderedSet<T>.Rent(comparer);
+            var buffer = Collection2.VBinarySet<T>.Rent(comparer);
             buffer.InternalBuffer.AddRange(itor);
             return buffer;
         }
 
 
-        public static VOrderedSet<T> ToVOrderedSet<T>(this VList<T> lst,
+        public static VBinarySet<T> ToVBinarySet<T>(this VList<T> lst,
             IComparer<T>? comparer) where T : notnull
         {
             if (comparer == null) throw new ArgumentNullException(nameof(comparer));
-            var buffer = VOrderedSet<T>.Rent(comparer);
+            var buffer = Collection2.VBinarySet<T>.Rent(comparer);
             buffer.InternalBuffer.AddRange(lst.Span);
             return buffer;
         }
 
-        public static VOrderedSet<T> ToVOrderedSet<T>(this VList<T> lst) where T : notnull
+        public static VBinarySet<T> ToVBinarySet<T>(this VList<T> lst) where T : notnull
         {
-            return ToVOrderedSet(lst, Comparer<T>.Default);
+            return ToVBinarySet(lst, Comparer<T>.Default);
         }
     }
 }
