@@ -58,7 +58,7 @@ public class UpdateVersionFromUPM
             var version = GetVersion(pckJson);
             var upmPropsContent = templ.Format(version);
             File.WriteAllText(upmProps, upmPropsContent);
-            _logger.LogInformation("Detecte version={ver},write success={upmProps}", version,upmProps);
+            _logger.LogInformation("Detect project={prj},version={ver},writeUpmProps={upmProps}", project,version,upmProps);
         }
 
         _logger.LogInformation("done");
