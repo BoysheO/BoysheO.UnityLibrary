@@ -47,7 +47,7 @@ public class UpdateVersionFromUPM
         // var slnFile = _configuration.GetValue<string>("SolutionPath") ??
         //               throw new Exception("missing SolutionPath entry in configuration");
         var dir = Directory.GetCurrentDirectory();///mnt/d/Repository/BoysheO.UnityLibrary/BoysheO.UnityLibrary.Dotnet/UpdateProjectsPackageVersion
-        dir = dir.AsPath().GetDirectoryName().Value.GetDirectoryName().Value.Value.Replace(@"\","/");//mnt/d/Repository/BoysheO.UnityLibrary
+        dir = dir.AsPath().GetDirectoryName()!.Value.GetDirectoryName()!.Value.Value.Replace(@"\","/");//mnt/d/Repository/BoysheO.UnityLibrary
         // var dir = slnFile.AsPath().GetDirectoryName().Value.Value.Replace(@"\","/");
         var projects = _configuration.GetSection("Projects").Get<string[]>() ??
                        throw new Exception("missing Projects entry in configuration");
@@ -58,7 +58,7 @@ public class UpdateVersionFromUPM
             var version = GetVersion(pckJson);
             var upmPropsContent = templ.Format(version);
             File.WriteAllText(upmProps, upmPropsContent);
-            _logger.LogInformation("write success:{upmProps}", upmProps);
+            _logger.LogInformation("Detecte version={ver},write success={upmProps}", version,upmProps);
         }
 
         _logger.LogInformation("done");
